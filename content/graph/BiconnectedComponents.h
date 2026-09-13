@@ -5,9 +5,9 @@
  * Source: folklore
  * Description: Finds all biconnected components in an undirected graph, and
  *  runs a callback for the edges in each. In a biconnected component there
- *  are at least two distinct paths between any two nodes. Note that a node can
- *  be in several components. An edge which is not in a component is a bridge,
- *  i.e., not part of any cycle.
+ *  are at least two internally disjoint paths between any two nodes (a cycle
+ *  exists through them). Note that a node can be in several components. An
+ *  edge which is not in a component is a bridge, i.e., not part of any cycle.
  * Usage:
  *  int eid = 0; ed.resize(N);
  *  for each edge (a,b) {
@@ -24,9 +24,8 @@ vector<vector<pii>> ed;
 int Time;
 template<class F>
 int dfs(int at, int par, F& f) {
-	int me = num[at] = ++Time, e, y, top = me;
-	for (auto pa : ed[at]) if (pa.second != par) {
-		tie(y, e) = pa;
+	int me = num[at] = ++Time, top = me;
+	for (auto [y, e] : ed[at]) if (e != par) {
 		if (num[y]) {
 			top = min(top, num[y]);
 			if (num[y] < me)

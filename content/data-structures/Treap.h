@@ -33,29 +33,36 @@ template<class F> void each(Node* n, F f) {
 	if (n) { push(n);each(n->l, f);f(n->val);each(n->r, f); }
 }
 
-// Put i first nodes into l, the rest into r
-void split(Node* x, Node*& l, Node*& r, int i) {
-	if (!x) return void(l = r = 0);
-	push(x);
-	// replace cnt(x->l) with x->val for lower_bound(i)
-	if (i <= cnt(x->l)) split(x->l, l, x->l, i), r = x;
-	//                        and just i instead
-	else split(x->r, x->r, r, i - cnt(x->l) - 1), l = x;
-	pull(x);
+pair<Node*, Node*> split(Node* n, int k) {
+	if (!n) return {};
+	if (cnt(n->l) >= k) { // "n->val >= k" for lower_bound(k)
+		auto [L,R] = split(n->l, k);
+		n->l = R;
+		n->recalc();
+		return {L, n};
+	} else {
+		auto [L,R] = split(n->r,k - cnt(n->l) - 1); // and just "k"
+		n->r = L;
+		n->recalc();
+		return {n, R};
+	}
 }
 
-// Append r to l, store it in x
-void merge(Node*& x, Node* l, Node* r) {
-	push(l), push(r);
-	if (!l || !r) x = l ? l : r;
-	else if (l->y < r->y) merge(r->l, l, r->l), x = r;
-	else merge(l->r, l->r, r), x = l;
-	pull(x);
+Node* merge(Node* l, Node* r) {
+	if (!l) return r;
+	if (!r) return l;
+	if (l->y > r->y) {
+		l->r = merge(l->r, r);
+		return l->recalc(), l;
+	} else {
+		r->l = merge(l, r->l);
+		return r->recalc(), r;
+	}
 }
 
-void insert(Node*& t, Node* n, int pos) {
-	Node* l, * r;
-	split(t, l, r, pos), merge(l, l, n), merge(t, l, r);
+Node* ins(Node* t, Node* n, int pos) {
+	auto [l,r] = split(t, pos);
+	return merge(merge(l, n), r);
 }
 
 // Example application: move the range [l, r) to index k

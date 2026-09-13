@@ -5,3 +5,9 @@
 a.out
 header.tmp
 .vscode
+kactl.pdf
+*.orig
+*_BACKUP_*
+*_BASE_*
+*_LOCAL_*
+*_REMOTE_*
