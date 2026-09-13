@@ -1,0 +1,2 @@
+system("./code1"); system("./code2");
+if (system("diff -w -s task.out task.ans")) exit(0);

@@ -36,6 +36,37 @@
 
 	\subsection{Lucas' Theorem}
 		Let $n,m$ be non-negative integers and $p$ a prime. Write $n=n_kp^k+...+n_1p+n_0$ and $m=m_kp^k+...+m_1p+m_0$. Then $\binom{n}{m} \equiv \prod_{i=0}^k\binom{n_i}{m_i} \pmod{p}$.
+	
+	\subsection{Stars and bars}
+		Count nonnegative integer solutions to $x_1+\dots+x_k=n$.
+		\[
+			\#\{x_i\ge0,\ \sum x_i=n\}=\binom{n+k-1}{k-1},\qquad
+			\#\{x_i\ge1,\ \sum x_i=n\}=\binom{n-1}{k-1}.
+		\]
+		Bounded version via inclusion--exclusion: if $0\le x_i\le U_i$ then
+		\[
+			\sum_{J\subseteq[k]}(-1)^{|J|}
+			\binom{n-\sum_{j\in J}(U_j+1)+k-1}{k-1},
+		\]
+		where terms with a negative top are taken as $0$.
+
+	\subsection{Inclusion--exclusion}
+		For finite sets $A_1,\dots,A_m$,
+		\[
+			\left|\bigcup_{i=1}^m A_i\right|
+			=\sum_{i}|A_i|
+			-\sum_{i<j}|A_i\cap A_j|
+			+\sum_{i<j<k}|A_i\cap A_j\cap A_k|
+			-\cdots.
+		\]
+		Equivalently, the number of elements with **none** of the properties $A_i$ is
+		\[
+			N-\sum_i|A_i|+\sum_{i<j}|A_i\cap A_j|-\cdots.
+		\]
+		Simple useful corollary: number of derangements
+		\[
+			D(n)=n!\sum_{i=0}^n\frac{(-1)^i}{i!}.
+		\]
 
 	\subsection{Binomials}
 		\kactlimport{multinomial.h}

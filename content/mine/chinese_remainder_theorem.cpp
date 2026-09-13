@@ -1,14 +1,7 @@
-/**
- * Author: buidangnguyen05
- * Date: 2024-11-28
- * License: CC0
- * Description: Chinese Remainder Theorem.
- *
- * Usage: Iterate through all factors of M, call add(x) to multiply by x and del(x) to divide by x.
- * Time: $\log(n)$
- * Status: Works
- */
-#pragma once
+void normalize(ll &x, ll mod) {
+	x %= mod;
+	if (x < 0) x += mod;
+}
 
 ll px, py, pd;
 void ExEuclid(ll a, ll b) {
@@ -37,7 +30,9 @@ struct ChineseRemainderTheorem {
 
 	void add(ll a, ll n) {
 		ExtendedEuclidean(lcm, n);
-		ans = ans + x * (a - ans) / d % (n / d) * lcm; lcm = lcm * n / d;
+		assert((a - ans) % d == 0);
+		ans = ans + x * (a - ans) / d % (n / d) * lcm; 
+		lcm = lcm * n / d; // beware of overflow, use ModMulLL if necessary
 		normalize(ans, lcm);
 	}
 };
@@ -75,26 +70,4 @@ struct FactorData {
 		if (cnt_base >= lim) return 0;
 		return 1LL * non_zero * pw(base, cnt_base) % mod;
 	}
-} factors[10];
-
-void process(int M) {
-	int x = M;
-	for (int i = 2; i * i <= x && x != 1; ++i) {
-		int cur = 1, cnt = 0;
-		while (x % i == 0) {
-			cur *= i;
-			x /= i;
-			++cnt;
-		}
-		if (cnt) {
-			factors[++it].mod = cur;
-			factors[it].base = i;
-			factors[it].lim = cnt;
-		}
-	}
-	if (x != 1) {
-		factors[++it].mod = x;
-		factors[it].base = x;
-		factors[it].lim = 1;
-	}
-}
+} factors[7];

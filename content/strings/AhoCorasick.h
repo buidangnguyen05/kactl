@@ -11,6 +11,7 @@
  * Duplicate patterns are allowed; empty patterns are not.
  * To find the longest words that start at each position, reverse all input.
  * For large alphabets, split each symbol into chunks, with sentinel bits for symbol boundaries.
+ * Important property: The suffix links form a tree, can be exploited using DFS traversal.
  * Time: construction takes $O(26N)$, where $N =$ sum of length of patterns.
  * find(x) is $O(N)$, where N = length of x. findAll is $O(NM)$.
  * Status: stress-tested

@@ -1,0 +1,117 @@
+/**
+ * Author: Jerry
+ * Date: 2023-10-01
+ * License: CC0
+ * Description: Palindromic Tree (Eertree);
+ * Based on COCI 21 Palindromi.
+ * Problem statement:
+ * Given n strings and n - 1 queries, for each query (x, y) s[x] += s[y]. 
+ * After each concatenation, print the number of palindromes in the resulting string.
+ * If there isn't a need for adding from both sides, simply 
+ * iterating the suffix links from the parent node to find base string A 
+ * and suffix link B is sufficient. 
+ * Time: O(n * alphabetsize)
+ */
+struct Node {
+	int len = 0, link = 0;
+	int suf[2] = {1, 1}, child[2] = {0, 0};
+	Node() {};
+};
+struct PalindromeTree {
+	deque<char> s;
+	int it, sz, L, R; // it is number of palindromes + 2
+	vector<Node> nodes;
+	PalindromeTree () {
+		nodes.resize(3);
+		it = L = R = 2; sz = 0;
+		nodes[1].len = -1; //Virtual root (len = -1) 
+		nodes[1].link = nodes[2].link = 1;
+	}
+	void new_node(int par, char c) {
+		++it; nodes.push_back(Node());
+		nodes[it].len = nodes[par].len + 2;
+		nodes[par].child[c - '0'] = it;
+		if (par != 1) nodes[it].link = nodes[nodes[par].suf[c - '0']].child[c - '0'];
+		else nodes[it].link = 2;
+	}
+	void add_right(char c) {
+		s.push_back(c); int par;
+		if (nodes[R].len < sz && s[sz - nodes[R].len - 1] == c) par = R;
+		else par = nodes[R].suf[c - '0'];
+		if (!nodes[par].child[c - '0']) {
+			new_node(par, c);
+			if (s[sz - nodes[nodes[it].link].len] == '0') {
+				nodes[it].suf[0] = nodes[it].link;
+				nodes[it].suf[1] = nodes[nodes[it].link].suf[1];
+			}
+			else {
+				nodes[it].suf[0] = nodes[nodes[it].link].suf[0];
+				nodes[it].suf[1] = nodes[it].link;
+			}
+		}
+		++sz;
+		R = nodes[par].child[c - '0'];
+		if (nodes[R].len == sz) L = R;
+	}
+	void add_left(char c) {
+		int par;
+		if (nodes[L].len < sz && s[nodes[L].len] == c) par = L;
+		else par = nodes[L].suf[c - '0'];
+		if (!nodes[par].child[c - '0']) {
+			new_node(par, c);
+			if (nodes[nodes[it].link].len > 0 && s[nodes[nodes[it].link].len - 1] == '0' || nodes[nodes[it].link].len < 1 && c == '0') {
+				nodes[it].suf[0] = nodes[it].link;
+				nodes[it].suf[1] = nodes[nodes[it].link].suf[1];
+			}
+			else {
+				nodes[it].suf[0] = nodes[nodes[it].link].suf[0];
+				nodes[it].suf[1] = nodes[it].link;
+			}
+		}
+		s.push_front(c); ++sz;
+		L = nodes[par].child[c - '0'];
+		if (nodes[L].len == sz) R = L;
+	}
+} t[N];
+/// Alternative implementation
+struct node {
+    int next[26], len, sufflink, num;
+};
+bool addLetter(int pos) {
+    int cur = suff, curlen = 0;
+    int let = s[pos] - 'a';
+    while (true) {
+        curlen = tree[cur].len;
+        if (pos - 1 - curlen >= 0 && s[pos - 1 - curlen] == s[pos])     
+            break;  
+        cur = tree[cur].sufflink;
+    }       
+    if (tree[cur].next[let]) {  
+        suff = tree[cur].next[let];
+        return false;
+    }
+    num++;
+    suff = num;
+    tree[num].len = tree[cur].len + 2;
+    tree[cur].next[let] = num;
+    if (tree[num].len == 1) {
+        tree[num].sufflink = 2;
+        tree[num].num = 1;
+        return true;
+    }
+    while (true) {
+        cur = tree[cur].sufflink;
+        curlen = tree[cur].len;
+        if (pos - 1 - curlen >= 0 && s[pos - 1 - curlen] == s[pos]) {
+            tree[num].sufflink = tree[cur].next[let];
+            break;
+        }       
+    }           
+    tree[num].num = 1 + tree[tree[num].sufflink].num;
+    return true;
+}
+void initTree() {
+    num = 2; suff = 2;
+    tree[1].len = -1; tree[1].sufflink = 1;
+    tree[2].len = 0; tree[2].sufflink = 1;
+}

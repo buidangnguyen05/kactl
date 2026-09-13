@@ -1,0 +1,32 @@
+\documentclass[9pt, a4paper, notitlepage]{extreport}
+\usepackage{kactlpkg}
+\kactlcontentdir{content}
+
+\university{HP.CTP.01}{HSGS Tran Phu - Hai Phong}{hsgsctp}
+\team{HP.CTP.01}{}
+\contest{\ }{November 13, 2022}
+\enablecolors
+
+\begin{document}
+  % \maketeampage
+  % Small header on the first page:
+  % \maketitle{``One Last Time'' Edition}{\today}
+  \begin{multicols*}{3}
+  \thispagestyle{fancy}
+  % Table of contents, without subsections:
+  \setcounter{tocdepth}{0}
+  \tableofcontents
+
+  \kactlchapter{contest}
+  \kactlchapter{math}
+  \kactlchapter{data-structures}
+  \kactlchapter{numerical}
+  \kactlchapter{number-theory}
+  \kactlchapter{combinatorial}
+  \kactlchapter{graph}
+  \kactlchapter{geometry}
+  \kactlchapter{strings}
+  \kactlchapter{various}
+  % \kactlchapter{appendix}
+  \end{multicols*}
+\end{document}
