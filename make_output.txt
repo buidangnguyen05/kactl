@@ -1,0 +1,432 @@
+pdflatex -shell-escape -output-directory build/ content/kactl.tex && pdflatex -shell-escape -output-directory build/ content/kactl.tex
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex)
+ \write18 enabled.
+entering extended mode
+(./content/kactl.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(/usr/share/texlive/texmf-dist/tex/latex/extsizes/extreport.cls
+Document Class: extreport 1996/10/08 v1.0 Non Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/extsizes/size8.clo) (/usr/share/texlive/texmf-dist/tex/latex/base/exscale.sty)) (content/tex/kactlpkg.sty (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstpatch.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg))
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+(/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))) (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/usr/share/texlive/texmf-dist/tex/latex/tocloft/tocloft.sty) (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titletoc.sty) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/courier.sty) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def))) (/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def)) (/usr/share/texlive/texmf-dist/tex/latex/paralist/paralist.sty) (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty) (/usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty (/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg) (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def) (/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty (/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty)) (/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def) (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty) (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty (/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty)) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def)
+No file kactl.aux.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (build//kactl.out) (build//kactl.out) [0{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./ntu.jpg>]
+No file kactl.toc.
+(./content/contest/chapter.tex
+Chapter 1.
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd) * [1mtemplate.cpp[0m
+ (./build/kactl.tmp (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd)) * [1mbuild.sh[0m
+ (./build/kactl.tmp (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd)) * [1mhash.sh[0m
+ (./build/kactl.tmp) * [1mlinux-compare[0m
+ (./build/kactl.tmp) * [1mtroubleshoot.txt[0m
+ (./build/kactl.tmp)) (./content/math/chapter.tex
+Chapter 2.
+[1{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} <./content/math/sphericalCoordinates.pdf>]
+Overfull \hbox (6.66902pt too wide) detected at line 107
+[]
+
+Overfull \hbox (30.0pt too wide) in paragraph at lines 107--107
+[]  
+) (./content/data-structures/chapter.tex * [1mOrderStatisticTree.h[0m
+
+Chapter 3.
+(./build/kactl.tmp (./build/header2.tmp) [2] (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd)) * [1mHashMap.h[0m
+ (./build/kactl.tmp) * [1mPalindromicTree.h[0m
+ (./build/kactl.tmp) * [1mSegmentTreeBeats.h[0m
+ (./build/kactl.tmp) * [1mXorSegmentTree.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [3]) * [1mUnionFindRollback.h[0m
+ (./build/kactl.tmp) * [1mDynamicWaveletTree.h[0m
+ (./build/kactl.tmp) * [1mMatrix.h[0m
+ (./build/kactl.tmp (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd)) * [1mLineContainer.h[0m
+ (./build/kactl.tmp) * [1mLiChaoTree.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [4]) * [1mTreap.h[0m
+ (./build/kactl.tmp) * [1mFenwickTree.h[0m
+ (./build/kactl.tmp) * [1mFenwickTree2d.h[0m
+ (./build/kactl.tmp) * [1mRMQ.h[0m
+ (./build/kactl.tmp) * [1m2DSparseTable.h[0m
+ (./build/kactl.tmp)<stdin>:35:9: warning: ‘K’ redefined
+<stdin>:8:9: note: this is the location of the previous definition
+ * [1mMoQueries.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [5]) * [1mOrderedSet.h[0m
+ (./build/kactl.tmp) * [1mBitset.h[0m
+ (./build/kactl.tmp)) (./content/numerical/chapter.tex * [1mPolynomial.h[0m
+
+Chapter 4.
+(./build/kactl.tmp) * [1mPolyRoots.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [6]) * [1mPolyInterpolate.h[0m
+ (./build/kactl.tmp) * [1mBerlekampMassey.h[0m
+ (./build/kactl.tmp) * [1mLinearRecurrence.h[0m
+ (./build/kactl.tmp) * [1mGoldenSectionSearch.h[0m
+ (./build/kactl.tmp) * [1mHillClimbing.h[0m
+ (./build/kactl.tmp) * [1mIntegrate.h[0m
+ (./build/kactl.tmp) * [1mLagrangeInterpolation.h[0m
+ (./build/kactl.tmp) * [1mIntegrateAdaptive.h[0m
+ (./build/kactl.tmp) * [1mSimplex.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [7]) * [1mDeterminant.h[0m
+ (./build/kactl.tmp) * [1mIntDeterminant.h[0m
+ (./build/kactl.tmp) * [1mSolveLinear.h[0m
+ (./build/kactl.tmp) * [1mSolveLinear2.h[0m
+ (./build/kactl.tmp) * [1mSolveLinearBinary.h[0m
+ (./build/kactl.tmp) * [1mMatrixInverse.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [8]) * [1mTridiagonal.h[0m
+ (./build/kactl.tmp) * [1mFastFourierTransform.h[0m
+ (./build/kactl.tmp) * [1mFastFourierTransformMod.h[0m
+ (./build/kactl.tmp) * [1mNumberTheoreticTransform.h[0m
+ (./build/kactl.tmp) * [1mFastSubsetTransform.h[0m
+ (./build/kactl.tmp)) (./content/number-theory/chapter.tex * [1mModularArithmetic.h[0m
+
+Chapter 5.
+(./build/kactl.tmp (./build/header2.tmp) [9]) * [1mModInverse.h[0m
+ (./build/kactl.tmp) * [1mModPow.h[0m
+ (./build/kactl.tmp) * [1mModLog.h[0m
+ (./build/kactl.tmp) * [1mModSum.h[0m
+ (./build/kactl.tmp) * [1mModMulLL.h[0m
+ (./build/kactl.tmp) * [1mModSqrt.h[0m
+ (./build/kactl.tmp) * [1mFastEratosthenes.h[0m
+ (./build/kactl.tmp) * [1mMillerRabin.h[0m
+ (./build/kactl.tmp) * [1mFactor.h[0m
+ (./build/kactl.tmp (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd)) * [1mCountPrimes.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [10]) * [1meuclid.h[0m
+ (./build/kactl.tmp) * [1mCRT.h[0m
+ (./build/kactl.tmp) * [1mphiFunction.h[0m
+ (./build/kactl.tmp) * [1mContinuedFractions.h[0m
+ (./build/kactl.tmp) * [1mFracBinarySearch.h[0m
+ (./build/kactl.tmp) (./build/header2.tmp) [11] * [1mFlooredDivisors.h[0m
+ (./build/kactl.tmp)) (./content/combinatorial/chapter.tex
+Chapter 6.
+(./content/combinatorial/factorial.tex) * [1mIntPerm.h[0m
+ (./build/kactl.tmp) * [1mmultinomial.h[0m
+
+Overfull \hbox (21.07431pt too wide) detected at line 45
+\OT1/cmr/m/n/8 #\OMS/cmsy/m/n/8 f\OML/cmm/m/it/8 x[] \OMS/cmsy/m/n/8 ^^U \OT1/cmr/m/n/8 0\OML/cmm/m/it/8 ;  [] x[] \OT1/cmr/m/n/8 = \OML/cmm/m/it/8 n\OMS/cmsy/m/n/8 g \OT1/cmr/m/n/8 = []\OML/cmm/m/it/8 ;  \OT1/cmr/m/n/8 #\OMS/cmsy/m/n/8 f\OML/cmm/m/it/8 x[] \OMS/cmsy/m/n/8 ^^U \OT1/cmr/m/n/8 1\OML/cmm/m/it/8 ;  [] x[] \OT1/cmr/m/n/8 = \OML/cmm/m/it/8 n\OMS/cmsy/m/n/8 g \OT1/cmr/m/n/8 = []\OML/cmm/m/it/8 :
+(./build/kactl.tmp) (./build/header2.tmp) [12]) (./content/graph/chapter.tex * [1mBellmanFord.h[0m
+
+Chapter 7.
+(./build/kactl.tmp) * [1mTopoSort.h[0m
+ (./build/kactl.tmp) * [1mPushRelabel.h[0m
+ (./build/kactl.tmp) * [1mEdmondsKarp.h[0m
+ (./build/kactl.tmp) * [1mFlowWithDemands.h[0m
+ (./build/kactl.tmp) * [1mMinCostMaxFlow.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [13]) * [1mMinCut.h[0m
+ (./build/kactl.tmp) * [1mGlobalMinCut.h[0m
+ (./build/kactl.tmp) * [1mGomoryHu.h[0m
+ (./build/kactl.tmp) * [1mHopcroftKarp.h[0m
+ (./build/kactl.tmp) * [1mDFSMatching.h[0m
+ (./build/kactl.tmp) * [1mMinimumVertexCover.h[0m
+ (./build/kactl.tmp) * [1mWeightedMatching.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [14]) * [1mGeneralMatching.h[0m
+ (./build/kactl.tmp) * [1mBiconnectedComponents.h[0m
+ (./build/kactl.tmp) * [1mTwoConnectedComponents.h[0m
+ (./build/kactl.tmp) * [1m2sat.h[0m
+ (./build/kactl.tmp) * [1mEulerWalk.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [15]) * [1mEdgeColoring.h[0m
+ (./build/kactl.tmp) * [1mMaximalCliques.h[0m
+ (./build/kactl.tmp) * [1mMaximumClique.h[0m
+ (./build/kactl.tmp) * [1mMaximumIndependentSet.h[0m
+ (./build/kactl.tmp) * [1mCompressTree.h[0m
+ (./build/kactl.tmp) * [1mHLD.h[0m
+ (./build/kactl.tmp) * [1mCentroidDecomposition.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [16]) * [1mLinkCutTree.h[0m
+ (./build/kactl.tmp) * [1mDirectedMST.h[0m
+ (./build/kactl.tmp)) (./content/geometry/chapter.tex
+Chapter 8.
+(./build/header2.tmp) [17] * [1mPoint.h[0m
+ (./build/kactl.tmp) * [1mlineDistance.h[0m
+ (./build/kactl.tmp) * [1mSegmentDistance.h[0m
+ (./build/kactl.tmp) * [1mSegmentIntersection.h[0m
+ (./build/kactl.tmp) * [1mlineIntersection.h[0m
+ (./build/kactl.tmp) * [1msideOf.h[0m
+ (./build/kactl.tmp) * [1mOnSegment.h[0m
+ (./build/kactl.tmp) * [1mlinearTransformation.h[0m
+ (./build/kactl.tmp) * [1mLineProjectionReflection.h[0m
+ (./build/kactl.tmp) * [1mAngle.h[0m
+ (./build/kactl.tmp
+Underfull \hbox (badness 10000) in paragraph at lines 9--9
+\OT1/pcr/m/n/6 // sweeps j such that (j-i) represents the number of positively oriented
+) * [1mCircleIntersection.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [18 <./content/geometry/lineDistance.pdf> <./content/geometry/SegmentDistance.pdf> <./content/geometry/SegmentIntersection.pdf> <./content/geometry/lineIntersection.pdf> <./content/geometry/linearTransformation.pdf>]) * [1mCircleTangents.h[0m
+ (./build/kactl.tmp) * [1mCircleLine.h[0m
+ (./build/kactl.tmp) * [1mCirclePolygonIntersection.h[0m
+ (./build/kactl.tmp) * [1mcircumcircle.h[0m
+ (./build/kactl.tmp) * [1mMinimumEnclosingCircle.h[0m
+ (./build/kactl.tmp) * [1mInsidePolygon.h[0m
+ (./build/kactl.tmp) * [1mPolygonArea.h[0m
+ (./build/kactl.tmp) * [1mPolygonCenter.h[0m
+ (./build/kactl.tmp) * [1mPolygonCut.h[0m
+ (./build/kactl.tmp) * [1mConvexHull.h[0m
+ (./build/kactl.tmp) * [1mHullDiameter.h[0m
+ (./build/kactl.tmp) * [1mPointInsideHull.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [19 <./content/geometry/circumcircle.pdf> <./content/geometry/PolygonCut.pdf> <./content/geometry/ConvexHull.pdf>]) * [1mLineHullIntersection.h[0m
+ (./build/kactl.tmp) * [1mClosestPair.h[0m
+ (./build/kactl.tmp) * [1mManhattanMST.h[0m
+ (./build/kactl.tmp) * [1mkdTree.h[0m
+ (./build/kactl.tmp) * [1mFastDelaunay.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [20]) * [1mPolyhedronVolume.h[0m
+ (./build/kactl.tmp) * [1mPoint3D.h[0m
+ (./build/kactl.tmp) * [1m3dHull.h[0m
+ (./build/kactl.tmp) * [1msphericalDistance.h[0m
+ (./build/kactl.tmp)) (./content/strings/chapter.tex * [1mKMP.h[0m
+
+Chapter 9.
+(./build/kactl.tmp) * [1mZfunc.h[0m
+ (./build/kactl.tmp) * [1mManacher.h[0m
+ (./build/kactl.tmp) (./build/header2.tmp) [21] * [1mMinRotation.h[0m
+ (./build/kactl.tmp) * [1mSuffixArray.h[0m
+ (./build/kactl.tmp) * [1mSuffixTree.h[0m
+ (./build/kactl.tmp) * [1mHashing.h[0m
+ (./build/kactl.tmp) * [1mAhoCorasick.h[0m
+ (./build/kactl.tmp)) (./content/various/chapter.tex
+Chapter 10.
+(./build/header2.tmp) [22] * [1mIntervalContainer.h[0m
+ (./build/kactl.tmp) * [1mIntervalCover.h[0m
+ (./build/kactl.tmp) * [1mConstantIntervals.h[0m
+ (./build/kactl.tmp) * [1mTernarySearch.h[0m
+ (./build/kactl.tmp) * [1mLIS.h[0m
+ (./build/kactl.tmp) * [1mFastKnapsack.h[0m
+ (./build/kactl.tmp) * [1mMo.h[0m
+ (./build/kactl.tmp) * [1mMoUpdate.h[0m
+ (./build/kactl.tmp) * [1mMoRollback.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [23]) * [1mMoOnTree.h[0m
+ (./build/kactl.tmp) * [1mKnuthDP.h[0m
+ (./build/kactl.tmp) * [1mDivideAndConquerDP.h[0m
+ (./build/kactl.tmp) * [1mFastMod.h[0m
+ (./build/kactl.tmp) * [1mFastInput.h[0m
+ (./build/kactl.tmp) * [1mBumpAllocator.h[0m
+ (./build/kactl.tmp) * [1mSmallPtr.h[0m
+ (./build/kactl.tmp) * [1mBumpAllocatorSTL.h[0m
+ (./build/kactl.tmp)) (./build/header2.tmp) [24] (build//kactl.aux) )
+(see the transcript file for additional information) </home/buidangnguyen05/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0600.600pk> </home/buidangnguyen05/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0800.600pk> </home/buidangnguyen05/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti0700.514pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
+Output written on build//kactl.pdf (25 pages, 2414324 bytes).
+Transcript written on build//kactl.log.
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex)
+ \write18 enabled.
+entering extended mode
+(./content/kactl.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(/usr/share/texlive/texmf-dist/tex/latex/extsizes/extreport.cls
+Document Class: extreport 1996/10/08 v1.0 Non Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/extsizes/size8.clo) (/usr/share/texlive/texmf-dist/tex/latex/base/exscale.sty)) (content/tex/kactlpkg.sty (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstpatch.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg))
+==> First Aid for listings.sty no longer applied!
+    Expected:
+        2024/09/23 1.10c (Carsten Heinz)
+    but found:
+        2025/11/14 1.11b (Carsten Heinz)
+    so I'm assuming it got fixed.
+(/usr/share/texlive/texmf-dist/tex/latex/framed/framed.sty) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty))) (/usr/share/texlive/texmf-dist/tex/latex/tools/multicol.sty) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty)) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty)) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+! Interruption.
+\__char_generate_aux:w ...fi: \if_int_compare:w #2
+                                                  >13\exp_stop_f: 1\fi: \exp...
+l.28 \DeclareRobustCommand
+                          {\text}{%
+? ) (/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty)) (/usr/share/texlive/texmf-dist/tex/latex/tocloft/tocloft.sty) (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titletoc.sty) (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/courier.sty) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty) (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg) (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def))) (/usr/share/texlive/texmf-dist/tex/latex/base/fix-cm.sty (/usr/share/texlive/texmf-dist/tex/latex/base/ts1enc.def)) (/usr/share/texlive/texmf-dist/tex/latex/paralist/paralist.sty) (/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty) (/usr/share/texlive/texmf-dist/tex/latex/parskip/parskip.sty (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty (/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty) (/usr/share/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty)) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg) (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)) (/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def) (/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty (/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty) (/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty (/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty (/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty))) (/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty) (/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty)) (/usr/share/texlive/texmf-dist/tex/generic/stringenc/stringenc.sty) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def) (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def) (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty) (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty (/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty))) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty))) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty)) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def) (build//kactl.aux)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)) (build//kactl.out) (build//kactl.out) [0{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./ntu.jpg>] (build//kactl.toc (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd) (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)) (./content/contest/chapter.tex * [1mtemplate.cpp[0m
+
+Chapter 1.
+(./build/kactl.tmp (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd)) * [1mbuild.sh[0m
+ (./build/kactl.tmp (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty) (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1pcr.fd)) * [1mhash.sh[0m
+ (./build/kactl.tmp) * [1mlinux-compare[0m
+ (./build/kactl.tmp) * [1mtroubleshoot.txt[0m
+ (./build/kactl.tmp)) (./content/math/chapter.tex
+Chapter 2.
+[1{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}]
+Overfull \hbox (6.66902pt too wide) detected at line 107
+[]
+
+Overfull \hbox (30.0pt too wide) in paragraph at lines 107--107
+[]  
+) (./content/data-structures/chapter.tex
+Chapter 3.
+(./build/header2.tmp) [2 <./content/math/sphericalCoordinates.pdf>] * [1mOrderStatisticTree.h[0m
+ (./build/kactl.tmp (/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd)) * [1mHashMap.h[0m
+ (./build/kactl.tmp) * [1mPalindromicTree.h[0m
+ (./build/kactl.tmp) * [1mSegmentTreeBeats.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [3]) * [1mXorSegmentTree.h[0m
+ (./build/kactl.tmp) * [1mUnionFindRollback.h[0m
+ (./build/kactl.tmp) * [1mDynamicWaveletTree.h[0m
+ (./build/kactl.tmp) * [1mMatrix.h[0m
+ (./build/kactl.tmp (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omspcr.fd)) * [1mLineContainer.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [4]) * [1mLiChaoTree.h[0m
+ (./build/kactl.tmp) * [1mTreap.h[0m
+ (./build/kactl.tmp) * [1mFenwickTree.h[0m
+ (./build/kactl.tmp) * [1mFenwickTree2d.h[0m
+ (./build/kactl.tmp) * [1mRMQ.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [5]) * [1m2DSparseTable.h[0m
+ (./build/kactl.tmp)<stdin>:35:9: warning: ‘K’ redefined
+<stdin>:8:9: note: this is the location of the previous definition
+ * [1mMoQueries.h[0m
+ (./build/kactl.tmp) * [1mOrderedSet.h[0m
+ (./build/kactl.tmp) * [1mBitset.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [6])) (./content/numerical/chapter.tex * [1mPolynomial.h[0m
+
+Chapter 4.
+(./build/kactl.tmp) * [1mPolyRoots.h[0m
+ (./build/kactl.tmp) * [1mPolyInterpolate.h[0m
+ (./build/kactl.tmp) * [1mBerlekampMassey.h[0m
+ (./build/kactl.tmp) * [1mLinearRecurrence.h[0m
+ (./build/kactl.tmp) * [1mGoldenSectionSearch.h[0m
+ (./build/kactl.tmp) * [1mHillClimbing.h[0m
+ (./build/kactl.tmp) * [1mIntegrate.h[0m
+ (./build/kactl.tmp) * [1mLagrangeInterpolation.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [7]) * [1mIntegrateAdaptive.h[0m
+ (./build/kactl.tmp) * [1mSimplex.h[0m
+ (./build/kactl.tmp) * [1mDeterminant.h[0m
+ (./build/kactl.tmp) * [1mIntDeterminant.h[0m
+ (./build/kactl.tmp) * [1mSolveLinear.h[0m
+ (./build/kactl.tmp) * [1mSolveLinear2.h[0m
+ (./build/kactl.tmp) * [1mSolveLinearBinary.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [8]) * [1mMatrixInverse.h[0m
+ (./build/kactl.tmp) * [1mTridiagonal.h[0m
+ (./build/kactl.tmp) * [1mFastFourierTransform.h[0m
+ (./build/kactl.tmp) * [1mFastFourierTransformMod.h[0m
+ (./build/kactl.tmp) * [1mNumberTheoreticTransform.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [9]) * [1mFastSubsetTransform.h[0m
+ (./build/kactl.tmp)) (./content/number-theory/chapter.tex * [1mModularArithmetic.h[0m
+
+Chapter 5.
+(./build/kactl.tmp) * [1mModInverse.h[0m
+ (./build/kactl.tmp) * [1mModPow.h[0m
+ (./build/kactl.tmp) * [1mModLog.h[0m
+ (./build/kactl.tmp) * [1mModSum.h[0m
+ (./build/kactl.tmp) * [1mModMulLL.h[0m
+ (./build/kactl.tmp) * [1mModSqrt.h[0m
+ (./build/kactl.tmp) * [1mFastEratosthenes.h[0m
+ (./build/kactl.tmp) * [1mMillerRabin.h[0m
+ (./build/kactl.tmp) * [1mFactor.h[0m
+ (./build/kactl.tmp (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd) (./build/header2.tmp) [10]) * [1mCountPrimes.h[0m
+ (./build/kactl.tmp) * [1meuclid.h[0m
+ (./build/kactl.tmp) * [1mCRT.h[0m
+ (./build/kactl.tmp) * [1mphiFunction.h[0m
+ (./build/kactl.tmp) * [1mContinuedFractions.h[0m
+ (./build/kactl.tmp) * [1mFracBinarySearch.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [11]) * [1mFlooredDivisors.h[0m
+ (./build/kactl.tmp)) (./content/combinatorial/chapter.tex
+Chapter 6.
+(./content/combinatorial/factorial.tex) * [1mIntPerm.h[0m
+ (./build/kactl.tmp) * [1mmultinomial.h[0m
+
+Overfull \hbox (21.07431pt too wide) detected at line 45
+\OT1/cmr/m/n/8 #\OMS/cmsy/m/n/8 f\OML/cmm/m/it/8 x[] \OMS/cmsy/m/n/8 ^^U \OT1/cmr/m/n/8 0\OML/cmm/m/it/8 ;  [] x[] \OT1/cmr/m/n/8 = \OML/cmm/m/it/8 n\OMS/cmsy/m/n/8 g \OT1/cmr/m/n/8 = []\OML/cmm/m/it/8 ;  \OT1/cmr/m/n/8 #\OMS/cmsy/m/n/8 f\OML/cmm/m/it/8 x[] \OMS/cmsy/m/n/8 ^^U \OT1/cmr/m/n/8 1\OML/cmm/m/it/8 ;  [] x[] \OT1/cmr/m/n/8 = \OML/cmm/m/it/8 n\OMS/cmsy/m/n/8 g \OT1/cmr/m/n/8 = []\OML/cmm/m/it/8 :
+(./build/kactl.tmp) (./build/header2.tmp) [12]) (./content/graph/chapter.tex * [1mBellmanFord.h[0m
+
+Chapter 7.
+(./build/kactl.tmp
+! Interruption.
+\KV@split ...after \@tempc \expandafter {\@tempb }
+                                                  \relax \fi \fi \fi 
+l.7 ...ing}[caption={BellmanFord.h}, language=C++]
+                                                  
+? ) * [1mTopoSort.h[0m
+ (./build/kactl.tmp) * [1mPushRelabel.h[0m
+ (./build/kactl.tmp) * [1mEdmondsKarp.h[0m
+ (./build/kactl.tmp) (./build/header2.tmp) [13] * [1mFlowWithDemands.h[0m
+ (./build/kactl.tmp) * [1mMinCostMaxFlow.h[0m
+ (./build/kactl.tmp) * [1mMinCut.h[0m
+ (./build/kactl.tmp) * [1mGlobalMinCut.h[0m
+ (./build/kactl.tmp) * [1mGomoryHu.h[0m
+ (./build/kactl.tmp) * [1mHopcroftKarp.h[0m
+ (./build/kactl.tmp) * [1mDFSMatching.h[0m
+ (./build/kactl.tmp) * [1mMinimumVertexCover.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [14]) * [1mWeightedMatching.h[0m
+ (./build/kactl.tmp) * [1mGeneralMatching.h[0m
+ (./build/kactl.tmp) * [1mBiconnectedComponents.h[0m
+ (./build/kactl.tmp) * [1mTwoConnectedComponents.h[0m
+ (./build/kactl.tmp) * [1m2sat.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [15]) * [1mEulerWalk.h[0m
+ (./build/kactl.tmp) * [1mEdgeColoring.h[0m
+ (./build/kactl.tmp) * [1mMaximalCliques.h[0m
+ (./build/kactl.tmp) * [1mMaximumClique.h[0m
+ (./build/kactl.tmp) * [1mMaximumIndependentSet.h[0m
+ (./build/kactl.tmp) * [1mCompressTree.h[0m
+ (./build/kactl.tmp) * [1mHLD.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [16]) * [1mCentroidDecomposition.h[0m
+ (./build/kactl.tmp) * [1mLinkCutTree.h[0m
+ (./build/kactl.tmp) * [1mDirectedMST.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [17])) (./content/geometry/chapter.tex * [1mPoint.h[0m
+
+Chapter 8.
+(./build/kactl.tmp) * [1mlineDistance.h[0m
+ (./build/kactl.tmp) * [1mSegmentDistance.h[0m
+ (./build/kactl.tmp) * [1mSegmentIntersection.h[0m
+ (./build/kactl.tmp) * [1mlineIntersection.h[0m
+ (./build/kactl.tmp) * [1msideOf.h[0m
+ (./build/kactl.tmp) * [1mOnSegment.h[0m
+ (./build/kactl.tmp) * [1mlinearTransformation.h[0m
+ (./build/kactl.tmp) * [1mLineProjectionReflection.h[0m
+ (./build/kactl.tmp) * [1mAngle.h[0m
+ (./build/kactl.tmp
+Underfull \hbox (badness 10000) in paragraph at lines 9--9
+\OT1/pcr/m/n/6 // sweeps j such that (j-i) represents the number of positively oriented
+(./build/header2.tmp) [18 <./content/geometry/lineDistance.pdf> <./content/geometry/SegmentDistance.pdf> <./content/geometry/SegmentIntersection.pdf> <./content/geometry/lineIntersection.pdf> <./content/geometry/linearTransformation.pdf>]) * [1mCircleIntersection.h[0m
+ (./build/kactl.tmp) * [1mCircleTangents.h[0m
+ (./build/kactl.tmp) * [1mCircleLine.h[0m
+ (./build/kactl.tmp) * [1mCirclePolygonIntersection.h[0m
+ (./build/kactl.tmp) * [1mcircumcircle.h[0m
+ (./build/kactl.tmp) * [1mMinimumEnclosingCircle.h[0m
+ (./build/kactl.tmp) * [1mInsidePolygon.h[0m
+ (./build/kactl.tmp) * [1mPolygonArea.h[0m
+ (./build/kactl.tmp) * [1mPolygonCenter.h[0m
+ (./build/kactl.tmp) * [1mPolygonCut.h[0m
+ (./build/kactl.tmp) * [1mConvexHull.h[0m
+ (./build/kactl.tmp) * [1mHullDiameter.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [19 <./content/geometry/circumcircle.pdf> <./content/geometry/PolygonCut.pdf> <./content/geometry/ConvexHull.pdf>]) * [1mPointInsideHull.h[0m
+ (./build/kactl.tmp) * [1mLineHullIntersection.h[0m
+ (./build/kactl.tmp) * [1mClosestPair.h[0m
+ (./build/kactl.tmp) * [1mManhattanMST.h[0m
+ (./build/kactl.tmp) * [1mkdTree.h[0m
+ (./build/kactl.tmp) * [1mFastDelaunay.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [20]) * [1mPolyhedronVolume.h[0m
+ (./build/kactl.tmp) * [1mPoint3D.h[0m
+ (./build/kactl.tmp) * [1m3dHull.h[0m
+ (./build/kactl.tmp) * [1msphericalDistance.h[0m
+ (./build/kactl.tmp)) (./content/strings/chapter.tex * [1mKMP.h[0m
+
+Chapter 9.
+(./build/kactl.tmp) * [1mZfunc.h[0m
+ (./build/kactl.tmp) (./build/header2.tmp) [21] * [1mManacher.h[0m
+ (./build/kactl.tmp) * [1mMinRotation.h[0m
+ (./build/kactl.tmp) * [1mSuffixArray.h[0m
+ (./build/kactl.tmp) * [1mSuffixTree.h[0m
+ (./build/kactl.tmp) * [1mHashing.h[0m
+ (./build/kactl.tmp) * [1mAhoCorasick.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [22])) (./content/various/chapter.tex * [1mIntervalContainer.h[0m
+
+Chapter 10.
+(./build/kactl.tmp) * [1mIntervalCover.h[0m
+ (./build/kactl.tmp) * [1mConstantIntervals.h[0m
+ (./build/kactl.tmp) * [1mTernarySearch.h[0m
+ (./build/kactl.tmp) * [1mLIS.h[0m
+ (./build/kactl.tmp) * [1mFastKnapsack.h[0m
+ (./build/kactl.tmp) * [1mMo.h[0m
+ (./build/kactl.tmp) * [1mMoUpdate.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [23]) * [1mMoRollback.h[0m
+ (./build/kactl.tmp) * [1mMoOnTree.h[0m
+ (./build/kactl.tmp) * [1mKnuthDP.h[0m
+ (./build/kactl.tmp) * [1mDivideAndConquerDP.h[0m
+ (./build/kactl.tmp) * [1mFastMod.h[0m
+ (./build/kactl.tmp) * [1mFastInput.h[0m
+ (./build/kactl.tmp) * [1mBumpAllocator.h[0m
+ (./build/kactl.tmp) * [1mSmallPtr.h[0m
+ (./build/kactl.tmp) * [1mBumpAllocatorSTL.h[0m
+ (./build/kactl.tmp (./build/header2.tmp) [24])) (./build/header2.tmp) [25] (build//kactl.aux) ) </home/buidangnguyen05/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0600.600pk> </home/buidangnguyen05/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm0800.600pk> </home/buidangnguyen05/.texlive2025/texmf-var/fonts/pk/ljfour/jknappen/ec/tcti0700.514pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb>
+Output written on build//kactl.pdf (26 pages, 2416492 bytes).
+Transcript written on build//kactl.log.
+make: *** [Makefile:25: kactl] Interrupt
