@@ -98,12 +98,32 @@ int main() {
 	};
 
 	// Known sequences: guess from 60 terms, extend to N and compare.
-	for (auto& [name, full] : known()) {
+	// Each has a relation of degree <= 3, so D = 3 must find one; a lower
+	// cap may find nothing, but anything it finds must respect the cap.
+	for (auto& [name, full] : known()) rep(D,0,4) {
 		vector<ll> a(full.begin(), full.begin() + 60);
-		Rel P = guessPRec(a);
-		assert(sz(P));
+		Mat P = guessPRec(a, D);
+		if (D == 3) assert(sz(P));
+		if (P.empty()) continue;
+		for (auto& p : P) assert(sz(p) <= D+1);
 		while (sz(a) < N) a.push_back(nextTerm(P, a, sz(a)));
 		assert(a == full);
+	}
+
+	// Order-degree trade-off: (n^2+1) n! has relations of order 1 and
+	// degree 3, and of order 3 and degree 1, but none with constant
+	// coefficients. Lowering the cap must switch to the longer relation.
+	{
+		vector<ll> a(60);
+		rep(n,0,60) a[n] = (ll(n) * n + 1) % mod * fact[n] % mod;
+		auto shape = [&](int D) {
+			Mat P = guessPRec(a, D);
+			return P.empty() ? pii(-1, -1) : pii(sz(P) - 1, sz(P[0]) - 1);
+		};
+		assert(shape(3) == pii(1, 3));
+		assert(shape(2) == pii(3, 1));
+		assert(shape(1) == pii(3, 1));
+		assert(shape(0) == pii(-1, -1));
 	}
 
 	// findPRec with a fixed (k, d): Catalan gives a multiple of
@@ -111,7 +131,7 @@ int main() {
 	{
 		vector<ll> cat(30);
 		rep(n,0,30) cat[n] = C(2*n, n) * inv(n+1) % mod;
-		Rel P = findPRec(cat, 1, 1);
+		Mat P = findPRec(cat, 1, 1);
 		assert(sz(P) == 2 && sz(P[0]) == 2);
 		ll s = P[0][0];
 		assert(s);
@@ -125,7 +145,7 @@ int main() {
 	// the whole sequence from (k+1)(d+1) + k + 5 terms (the minimum).
 	rep(it,0,1000) {
 		int k = (int)rnd(1, 4), d = (int)rnd(0, 3), M = 150;
-		Rel R(k+1, vector<ll>(d+1));
+		Mat R(k+1, vector<ll>(d+1));
 		for (auto& p : R) for (ll& x : p) x = rnd(0, mod-1);
 		vector<ll> full(M);
 		rep(i,0,k) full[i] = rnd(0, mod-1);
@@ -139,10 +159,18 @@ int main() {
 		if (!ok) continue;
 		int F = (k+1)*(d+1) + k + 5 + (int)rnd(0, 3);
 		vector<ll> a(full.begin(), full.begin() + F);
-		Rel P = guessPRec(a);
+		Mat P = guessPRec(a, d + (int)rnd(0, 2));
 		assert(sz(P) == k+1 && sz(P[0]) == d+1);
 		while (sz(a) < M) a.push_back(nextTerm(P, a, sz(a)));
 		assert(a == full);
+		if (d) { // below the true degree: nothing, or a correct relation within the cap
+			a.resize(F);
+			P = guessPRec(a, d-1);
+			if (P.empty()) continue;
+			for (auto& p : P) assert(sz(p) <= d);
+			while (sz(a) < M) a.push_back(nextTerm(P, a, sz(a)));
+			assert(a == full);
+		}
 	}
 
 	// Sequences that are not P-recursive must be rejected.
@@ -150,7 +178,7 @@ int main() {
 		rep(it,0,20) {
 			vector<ll> a((size_t)rnd(1, 50));
 			for (ll& x : a) x = rnd(0, mod-1);
-			assert(guessPRec(a).empty());
+			assert(guessPRec(a, 100).empty());
 		}
 		vector<ll> part(100), bell(100), sq(60);
 		part[0] = 1; // partition numbers
@@ -163,9 +191,9 @@ int main() {
 			row = nxt;
 		}
 		rep(n,0,60) sq[n] = modpow(2, (ll)n * n);
-		assert(guessPRec(part).empty());
-		assert(guessPRec(bell).empty());
-		assert(guessPRec(sq).empty());
+		assert(guessPRec(part, 100).empty());
+		assert(guessPRec(bell, 100).empty());
+		assert(guessPRec(sq, 100).empty());
 	}
 	cout << "Tests passed!" << endl;
 }
