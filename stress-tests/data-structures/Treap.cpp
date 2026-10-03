@@ -72,5 +72,25 @@ int main() {
 		});
 		// cerr << endl;
 	}
+	rep(it,0,10000) {
+		vector<Node> nodes;
+		vi exp;
+		rep(i,0,10) nodes.emplace_back(i);
+		rep(i,0,10) exp.emplace_back(i);
+		Node* n = 0;
+		rep(i,0,10) n = merge(n, &nodes[i]);
+
+		// apply a few random reversals, compare against std::reverse
+		rep(q,0,5) {
+			int i = ra() % 11, j = ra() % 11;
+			if (i > j) swap(i, j);
+			reverse(n, i, j);
+			std::reverse(exp.begin() + i, exp.begin() + j);
+		}
+		int ind = 0;
+		each(n, [&](int x) { assert(x == exp[ind++]); });
+		assert(ind == 10);
+	}
+
 	cout<<"Tests passed!"<<endl;
 }

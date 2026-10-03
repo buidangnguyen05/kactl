@@ -2,38 +2,29 @@
  * Author: Jerry
  * Date: 2023-10-01
  * License: CC0
- * Description: Lagrange interpolation knowing f(1), f(2), ..., f(k).
- * Time: O(n)
+ * Description: Given $f(0), \dots, f(d)$ of a degree-$d$ polynomial,
+ *  evaluates $f(x)$ mod a prime $> d$. Since $\sum_{i=1}^{x} i^k$ has
+ *  degree $k+1$, pass its first $k+2$ prefix sums to sum $k$th powers.
+ * Time: O(d \log \text{mod})
+ * Status: stress-tested
  */
-int interpolate(int x, int k, bool bf = false) {
-	if (k == 0) return x;
-	// find 1^k + 2^k + ... + x^k.(k+1) degree polynomial -> (k+2) points
-	if (x <= k + 1 || bf) {
-		int s = 0;
-		for (int i = 1; i <= x; i ++) {
-			s = (s + qpow(i, k)) % mod;
-		}
-		return s;
+#pragma once
+
+#include "../number-theory/ModPow.h"
+
+ll lagrange(const vector<ll>& y, ll x) {
+	int d = sz(y) - 1;
+	if (x <= d) return y[(int)x];
+	vector<ll> pre(d + 2, 1), suf(d + 2, 1), f(d + 1, 1);
+	rep(i,0,d+1) pre[i+1] = pre[i] * ((x - i) % mod) % mod;
+	for (int i = d; i >= 0; i--)
+		suf[i] = suf[i+1] * ((x - i) % mod) % mod;
+	rep(i,1,d+1) f[i] = f[i-1] * i % mod;
+	ll ans = 0;
+	rep(i,0,d+1) {
+		ll t = y[i] * (pre[i] * suf[i+1] % mod) % mod
+			* modpow(f[i] * f[d-i] % mod, mod - 2) % mod;
+		ans = ((d - i) & 1 ? ans - t : ans + t) % mod;
 	}
-	vector<int> pre(k + 2), suf(k + 2), inv(k + 2);
-	inv[0] = 1;
-	pre[0] = x;
-	suf[k + 1] = x - (k + 1);
-	for (int i = 1; i <= k; i ++) pre[i] = pre[i - 1] * (x - i) % mod; //numerator prefix product
-	for (int i = k; i >= 1; i --) suf[i] = suf[i + 1] * (x - i) % mod; //numerator suffix product
-	for (int i = 1; i <= k + 1; i ++) inv[i] = inv[i - 1] * rv(i) % mod; // denominator factorial
-	int ans = 0;
-	int yi = 0; // 0^k +~ i^k
-	int num, denom;
-	for (int i = 0; i <= k + 1; i ++) {
-		yi = (yi + qpow(i, k)) % mod; // interpolate point: (i, yi)
-		if (i == 0) num = suf[1];
-		else if (i == k + 1) num = pre[k];
-		else num = pre[i - 1] * suf[i + 1] % mod; // numerator
-		denom = inv[i] * inv[k + 1 - i] % mod; // denominator
-		if ((i + k) & 1) ans += (yi * num % mod) * denom % mod; // (-1)^(i-deg) however deg is k+1 here so :)
-		else ans -= (yi * num % mod) * denom % mod;
-		ans = (ans % mod + mod) % mod;
-	}
-	return ans;
+	return (ans + mod) % mod;
 }

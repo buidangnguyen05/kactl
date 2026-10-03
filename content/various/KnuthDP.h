@@ -7,32 +7,24 @@
  *  This is known as Knuth DP. Sufficient criteria for this are if $f(b,c) \le f(a,d)$ and $f(a,c) + f(b,d) \le f(a,d) + f(b,c)$ for all $a \le b \le c \le d$.
  *  Consider also: LineContainer (ch. Data structures), monotone queues, ternary search.
  * Time: O(N^2)
+ * Status: stress-tested against the cubic DP
  */
-
 #pragma once
 
-int knuth() {
-    int N; // read N and input
-    int dp[N][N], opt[N][N];
-    auto C = [&](int i, int j) {
-        return i + j; // Implement cost function C.
-    };
-    for (int i = 0; i < N; i++) {
-        opt[i][i] = i;
-        // Initialize dp[i][i] according to the problem
-    }
-    for (int i = N-2; i >= 0; i--) {
-        for (int j = i+1; j < N; j++) {
-            int mn = INT_MAX;
-            int cost = C(i, j);
-            for (int k = opt[i][j-1]; k <= min(j-1, opt[i+1][j]); k++) {
-                if (mn >= dp[i][k] + dp[k+1][j] + cost) {
-                    opt[i][j] = k; 
-                    mn = dp[i][k] + dp[k+1][j] + cost; 
-                }
-            }
-            dp[i][j] = mn; 
-        }
-    }
-    return dp[0][N-1];
+// Half-open: dp[i][j] covers items [i, j), and dp[i][i+1] = 0.
+// C(i, j) is the cost of the final merge; for merging stones with
+// prefix sums pre, C = [&](int i, int j) { return pre[j]-pre[i]; }.
+template<class F> ll knuth(int n, F C) {
+	vector<vector<ll>> dp(n + 1, vector<ll>(n + 1));
+	vector<vi> opt(n + 1, vi(n + 1));
+	rep(i,0,n) opt[i][i+1] = i;
+	for (int len = 2; len <= n; len++) rep(i,0,n-len+1) {
+		int j = i + len;
+		dp[i][j] = LLONG_MAX;
+		rep(k, max(i+1, opt[i][j-1]), min(j-1, opt[i+1][j]) + 1) {
+			ll v = dp[i][k] + dp[k][j] + C(i, j);
+			if (v < dp[i][j]) dp[i][j] = v, opt[i][j] = k;
+		}
+	}
+	return dp[0][n];
 }

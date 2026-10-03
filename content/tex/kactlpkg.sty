@@ -48,8 +48,8 @@
 }
 
 % Some default config
-\subtitle{{\tiny new}KACTL}
-\title{KTH Algorithm Competition Template Library}
+% \subtitle{{\tiny new}KACTL}
+% \title{KTH Algorithm Competition Template Library}
 \newcommand{\PDFColor}{0}
 \def\@builddir{build}
 
@@ -57,8 +57,6 @@
 
 \renewcommand{\maketitle}[2]{
 	\begin{center}
-		{\Huge \@title}\\
-		{\huge \@subtitle{} version #2}\\[0.1cm]
 		{\Huge \textsc{#1}}
 	\end{center}
 }
@@ -221,9 +219,9 @@
 	\begin{center}
 		\strut % Magic
 		\vspace{3cm}\\
-		\includegraphics[width=3cm]{\@unilogo}\\
+		\includegraphics[width=8cm]{\@unilogo}\\
 		{\fontsize{25}{30}\selectfont \@unilong\\}
-		{\fontsize{60}{60}\selectfont \@teamname\\}
+		{\fontsize{45}{50}\selectfont \@teamname\\}
 		\vspace{0.5cm}
 		{\huge \@teammembers\\}
 		\vfill

@@ -11,3 +11,6 @@ kactl.pdf
 *_BASE_*
 *_LOCAL_*
 *_REMOTE_*
+test-session.pdf
+make_output.txt
+*.bak

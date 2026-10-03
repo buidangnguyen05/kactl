@@ -1,56 +1,45 @@
 /**
  * Author: buidangnguyen05
- * Description: Maintains a set of lines $y(x) = ax + b$ and returns the minimum $y(pos)$.
- * Time: O(n \cdot \log_2 n)
+ * Description: Pointwise minimum of lines $y = ax+b$ over $x \in [0,n)$.
+ *  \texttt{addSeg} restricts a line to $[u,v]$. \texttt{Line::INF} where
+ *  uncovered; for maximum insert $(-a,-b)$ and negate.
+ * Time: \texttt{add}/\texttt{query} $O(\log n)$, \texttt{addSeg} $O(\log^2 n)$
+ * Status: stress-tested
  */
-
 #pragma once
-struct line {
-	int a, b;
+
+struct Line {
+	static constexpr ll INF = 1e18;
+	ll a = 0, b = INF;
+	ll operator()(ll x) const { return a * x + b; }
 };
-int get(line m, int x) {
-	return 1ll * m.a * x + m.b;
-}
-struct LiChaoTree {
-	line t[4 * N];
-	ll query(int s, int l, int r, int pos) {
-		if (l > pos || r < pos) return 1e18;
-		int res = get(t[s], pos);
+
+struct LiChao {
+	int n; vector<Line> t;
+	LiChao(int n) : n(n), t(4 * n) {}
+	void add(int s, int l, int r, Line f) {
+		int m = (l + r) / 2;
+		bool lef = f(l) < t[s](l), mid = f(m) < t[s](m);
+		if (mid) swap(t[s], f);
+		if (l == r) return;
+		if (lef != mid) add(2*s, l, m, f);
+		else add(2*s + 1, m + 1, r, f);
+	}
+	void addSeg(int s, int l, int r, int u, int v, Line f) {
+		if (v < l || r < u) return;
+		if (u <= l && r <= v) return add(s, l, r, f);
+		int m = (l + r) / 2;
+		addSeg(2*s, l, m, u, v, f);
+		addSeg(2*s + 1, m + 1, r, u, v, f);
+	}
+	ll query(int s, int l, int r, int x) {
+		ll res = t[s](x);
 		if (l == r) return res;
-		int mid = (l + r) / 2;
-		res = min(res, query(s * 2, l, mid, pos));
-		res = min(res, query(s * 2 + 1, mid + 1, r, pos));
-		return res;
+		int m = (l + r) / 2;
+		return min(res, x <= m ? query(2*s, l, m, x)
+		                       : query(2*s + 1, m + 1, r, x));
 	}
-	void update(int s, int l, int r, int u, int v, line val) {
-		if (l > v || u > r) return;
-		int mid = (l + r) / 2;
-		if (l >= u && r <= v) {
-			if (get(t[s], l) <= get(val, l) && get(t[s], r) <= get(val, r)) return;
-			if (get(t[s], l) >= get(val, l) && get(t[s], r) >= get(val, r)) {
-				t[s] = val;
-				return;
-			}
-			if (get(t[s], l) <= get(val, l) && get(t[s], mid) <= get(val, mid)) {
-				update(2 * s + 1, mid + 1, r, u, v, val);
-				return;
-			}
-			if (get(t[s], l) >= get(val, l) && get(t[s], mid + 1) >= get(val, mid + 1)) {
-				update(2 * s + 1, mid + 1, r, u, v, t[s]);
-				t[s] = val;
-				return;
-			}
-			if (get(t[s], r) <= get(val, r) && get(t[s], mid) <= get(val, mid)) {
-				update(2 * s, l, mid, u, v, val);
-				return;
-			}
-			if (get(t[s], r) >= get(val, r) && get(t[s], mid + 1) >= get(val, mid + 1)) {
-				update(2 * s, l, mid, u, v, t[s]);
-				t[s] = val;
-				return;
-			}
-		}
-		update(2 * s, l, mid, u, v, val);
-		update(2 * s + 1, mid + 1, r, u, v, val);
-	}
-} it;
+	void add(Line f) { add(1, 0, n - 1, f); }
+	void addSeg(Line f, int u, int v) { addSeg(1, 0, n-1, u, v, f); }
+	ll query(int x) { return query(1, 0, n - 1, x); }
+};

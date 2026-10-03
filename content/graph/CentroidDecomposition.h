@@ -1,25 +1,30 @@
 /**
  * Author: buidangnguyen05
- * Description: Divide-and-conquer on a tree.
- * Time: O(n \cdot \log_2 n) (with high constant factor)
+ * Description: Divide and conquer over a tree. Every vertex lies in
+ *  $O(\log n)$ components, so linear work per component totals $n\log n$.
+ * Time: O(n \log n) times the cost of the work at each centroid
+ * Status: stress-tested
  */
-
 #pragma once
-const int N = 2e5 + 10;
-int sz[N]; bool used[N];
-vector<int> adj[N];
-int calc(int x, int par) {
-    sz[x] = 1;
-    for (int &i : adj[x]) if (!used[i] && i != par) sz[x] += calc(i,x);
-    return sz[x];
+
+vector<vi> adj;
+vi sub; vector<bool> used;
+
+int calc(int x, int p) {
+	sub[x] = 1;
+	for (int i : adj[x])
+		if (i != p && !used[i]) sub[x] += calc(i, x);
+	return sub[x];
 }
-int getCentroid(int x, int par, int cnt) {
-    for (int &i : adj[x]) if (!used[i] && i != par && sz[i] * 2 > cnt) return getCentroid(i, x, cnt);
-    return x;
+int find(int x, int p, int n) {
+	for (int i : adj[x])
+		if (i != p && !used[i] && sub[i] * 2 > n)
+			return find(i, x, n);
+	return x;
 }
-void centroid(int x, int par = 0) {
-    int cnt = calc(x, x), node = getCentroid(x, x, cnt);
-    // do work here
-    used[node] = 1; 
-    for (int &i : adj[node])  if (!used[i]) centroid(i, node);
+void centroid(int x) {
+	int c = find(x, -1, calc(x, -1));
+	used[c] = 1;
+	// ... solve for paths through c here, using calc(c, -1) sizes ...
+	for (int i : adj[c]) if (!used[i]) centroid(i);
 }

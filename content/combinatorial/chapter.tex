@@ -12,6 +12,7 @@
 	\subsection{Derangements}
 		Permutations of a set such that none of the elements appear in their original position.
 		\[ \mkern-2mu D(n) = (n-1)(D(n-1)+D(n-2)) = n D(n-1)+(-1)^n = \left\lfloor\frac{n!}{e}\right\rceil \]
+		By inclusion--exclusion over the fixed points, $D(n)=n!\sum_{i=0}^n\frac{(-1)^i}{i!}$.
 
 	\subsection{Burnside's lemma}
 		Given a group $G$ of symmetries and a set $X$, the number of elements of $X$ \emph{up to symmetry} equals
@@ -39,10 +40,8 @@
 	
 	\subsection{Stars and bars}
 		Count nonnegative integer solutions to $x_1+\dots+x_k=n$.
-		\[
-			\#\{x_i\ge0,\ \sum x_i=n\}=\binom{n+k-1}{k-1},\qquad
-			\#\{x_i\ge1,\ \sum x_i=n\}=\binom{n-1}{k-1}.
-		\]
+		\[ \#\{x_i\ge0,\ \textstyle\sum x_i=n\}=\binom{n+k-1}{k-1}, \]
+		\[ \#\{x_i\ge1,\ \textstyle\sum x_i=n\}=\binom{n-1}{k-1}. \]
 		Bounded version via inclusion--exclusion: if $0\le x_i\le U_i$ then
 		\[
 			\sum_{J\subseteq[k]}(-1)^{|J|}
@@ -59,14 +58,12 @@
 			+\sum_{i<j<k}|A_i\cap A_j\cap A_k|
 			-\cdots.
 		\]
-		Equivalently, the number of elements with **none** of the properties $A_i$ is
+		Equivalently, the number of elements with \emph{none} of the properties $A_i$ is
 		\[
 			N-\sum_i|A_i|+\sum_{i<j}|A_i\cap A_j|-\cdots.
 		\]
-		Simple useful corollary: number of derangements
-		\[
-			D(n)=n!\sum_{i=0}^n\frac{(-1)^i}{i!}.
-		\]
+		Taking $A_i$ = ``$i$ is a fixed point'' gives the derangement
+		count above.
 
 	\subsection{Binomials}
 		\kactlimport{multinomial.h}

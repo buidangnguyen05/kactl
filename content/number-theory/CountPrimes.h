@@ -1,51 +1,29 @@
 /**
- * Author: awk
- * Description: Count number of primes up to n.
- * Time: O(\sqrt{n})
+ * Author: Lucy_Hedgehog
+ * Source: https://projecteuler.net/thread=10;page=5
+ * Description: Counts primes $\le n$. Replacing the $-1$ init and the
+ *  \texttt{sp} subtraction by an additive $f$ gives $\sum_{p\le n} f(p)$.
+ * Time: O(n^{3/4}), memory $O(\sqrt n)$
+ * Status: stress-tested against a sieve up to $10^6$, spot-checked to $10^{11}$
  */
-
 #pragma once
 
-ll piSieve(const ll n) {
-    if (n <= 1) return 0LL; if (n == 2) return 1LL;
-    const int lim = int(sqrt(n));
-    int vsz = (lim + 1) >> 1;
-    vector<int> smalls(vsz), roughs(vsz), larges(vsz);
-    rep(i,0,vsz) smalls[i]=i, roughs[i]=(i<<1|1), larges[i]=(n/(i<<1|1)-1)>>1;
-    vector<bool> skips(lim+1,false);
-    int pCnt=0;
-    for(int p=3;p<=lim;p+=2){
-        if (skips[p]) continue;
-        int p2 = p * p;
-        if (1LL * p2 * p2 > n) break;
-        skips[p] = true;
-        for(int cx = p2; cx <= lim; cx += (p << 1)) skips[cx] = true;
-        int ns = 0;
-        rep(cz, 0, vsz) {
-            int cur = roughs[cx];
-            if(skips[cur]) continue;
-            ll d = 1LL * cur * p;
-            larges[ns]=larges[cx]-(d<=lim?larges[smalls[d>>1]-pCnt]
-                :smalls[(ll((double(n)/d)-1))>>1])+pCnt;
-            roughs[ns++]=cur;
-        }
-        vsz=ns;
-        for(int cx=(lim-1)>>1,cy=((lim/p)-1)|1;cy>=p;cy-=2){
-            int cur=smalls[cy>>1]-pCnt;
-            for(int cz=(cy*p)>>1;cz<=cx;--cx) smalls[cx]-=cur;
-        }
-        ++pCnt;
-    }
-    larges[0]+=1LL*(vsz+((pCnt-1)<<1))*(vsz-1)>>1;
-    for(int cx=1;cx<vsz;++cx) larges[0]-=larges[cx];
-    for(int cx=1;cx<vsz;++cx){
-        int q=roughs[cx];
-        ll m=n/q;
-        int e=smalls[((m/q)-1)>>1]-pCnt;
-        if(e<cx+1) break;
-        ll t=0;
-        for(int cy=cx+1;cy<=e;++cy) t+=smalls[ll((double(m)/roughs[cy])-1)>>1];
-        larges[0]+=t-1LL*(e-cx)*(pCnt+cx-1);
-    }
-    return larges[0]+1;
+ll countPrimes(ll n) {
+	if (n < 2) return 0;
+	ll v = (ll)sqrtl(n);
+	while (v * v > n) v--;
+	while ((v+1) * (v+1) <= n) v++;
+	// s[i] = pi(i), l[i] = pi(n / i), both still counting composites
+	vector<ll> s(v + 1), l(v + 1);
+	rep(i,1,v+1) s[i] = i - 1, l[i] = n / i - 1;
+	rep(p,2,v+1) {
+		if (s[p] == s[p-1]) continue; // p is composite
+		ll sp = s[p-1], q = (ll)p * p;
+		rep(i,1,(int)min((ll)v, n / q) + 1) {
+			ll d = (ll)i * p;
+			l[i] -= (d <= v ? l[d] : s[n / d]) - sp;
+		}
+		for (ll i = v; i >= q; i--) s[i] -= s[i / p] - sp;
+	}
+	return l[1];
 }

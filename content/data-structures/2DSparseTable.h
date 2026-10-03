@@ -1,24 +1,30 @@
 /**
  * Author: Epiphyllum
- * Description: Self-explanatory.
- * Time: O(n \cdot \log_2^2 n)
+ * Description: Range max over a rectangle of a static grid, in O(1).
+ *  Inclusive corners. Memory $nm \log n \log m$ ints.
+ * Time: build $O(nm \log n \log m)$, query $O(1)$
+ * Status: stress-tested
  */
-
 #pragma once
 
-void st_prepare() {
-	repn(i, 1, n) repn(j, 1, m) st[0][0][i][j] = f[i][j];
-	for (int i = 1; (1 << i) <= n; i++)
-		repn(x, 1 << i, n) repn(y, 1, m)
-			st[i][0][x][y] = max(st[i - 1][0][x][y], st[i - 1][0][x - (1 << (i - 1))][y]);
-	for (int i = 0; (1 << i) <= n; i++)
-		for(int j =1; (1 << j) <= m; j++)
-			repn(x, 1 << i, n) repn(y, 1 << j, m) 
-				st[i][j][x][y] = max(st[i][j - 1][x][y], st[i][j - 1][x][y - (1 << (j - 1))]);
-}
-int query_max(int a, int b, int c, int d) {
-	int k1 = 31 - __builtin_clz(c - a + 1);
-	int k2 = 31 - __builtin_clz(d - b + 1);
-	return max(max(st[k1][k2][c][d], st[k1][k2][a + (1 << k1) - 1][d]),
-		max(st[k1][k2][c][b + (1 << k2) - 1],st[k1][k2][a + (1 << k1) - 1][b + (1 << k2) - 1]));
-}
+struct ST2D {
+	vector<vector<vector<vi>>> t;
+	ST2D(const vector<vi>& a) {
+		int n = sz(a), m = sz(a[0]);
+		int kn = __lg(n) + 1, km = __lg(m) + 1;
+		t.assign(kn, vector<vector<vi>>(km, vector<vi>(n, vi(m))));
+		t[0][0] = a;
+		rep(y,1,km) rep(i,0,n) rep(j,0,m - (1 << y) + 1)
+			t[0][y][i][j] = max(t[0][y-1][i][j],
+				t[0][y-1][i][j + (1 << (y-1))]);
+		rep(x,1,kn) rep(y,0,km) rep(i,0,n - (1 << x) + 1) rep(j,0,m)
+			t[x][y][i][j] = max(t[x-1][y][i][j],
+				t[x-1][y][i + (1 << (x-1))][j]);
+	}
+	int query(int i1, int j1, int i2, int j2) {
+		int x = __lg(i2 - i1 + 1), y = __lg(j2 - j1 + 1);
+		int p = i2 - (1 << x) + 1, q = j2 - (1 << y) + 1;
+		return max({t[x][y][i1][j1], t[x][y][p][j1],
+			t[x][y][i1][q], t[x][y][p][q]});
+	}
+};

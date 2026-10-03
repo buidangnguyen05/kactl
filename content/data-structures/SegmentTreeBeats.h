@@ -2,150 +2,104 @@
  * Author: Jerry
  * Date: 2023-10-01
  * License: CC0
- * Description: Segment Tree Beats.
- * Converts range min-max queries into addition queries.
- * Problem statement:
- * Given an array, perform operations of 4 kinds: range max, range min, range add, range sum.
- * Time: O(n * log_2(n))
+ * Description: Range $v \mapsto \min(v,x)$, $v \mapsto \max(v,x)$ and
+ *  range add, with range sum/min/max. Inclusive indices.
+ * Time: amortised $O(\log^2 n)$ per update, $O(\log n)$ per query
+ * Status: stress-tested
  */
+#pragma once
 
-const ll inf = 1e18;
-ll a[N];
-struct Node {
-	ll max1, max2, cnt_max;
-	ll min1, min2, cnt_min;
-	ll sum, lazy;
-};
-struct SegmentTree {
-	Node T[4 * N];
-	void merge(int s) {
-		T[s].sum = T[s << 1].sum + T[s << 1 | 1].sum;
-		if (T[s << 1].max1 == T[s << 1 | 1].max1) {
-			T[s].max1 = T[s << 1].max1;
-			T[s].cnt_max = T[s << 1].cnt_max + T[s << 1 | 1].cnt_max;
-			T[s].max2 = max(T[s << 1].max2, T[s << 1 | 1].max2);
-		}
-		else if (T[s << 1].max1 > T[s << 1 | 1].max1) {
-			T[s].max1 = T[s << 1].max1;
-			T[s].cnt_max = T[s << 1].cnt_max;
-			T[s].max2 = max(T[s << 1].max2, T[s << 1 | 1].max1);
-		}
-		else {
-			T[s].max1 = T[s << 1 | 1].max1;
-			T[s].cnt_max = T[s << 1 | 1].cnt_max;
-			T[s].max2 = max(T[s << 1].max1, T[s << 1 | 1].max2);
-		}
-		if (T[s << 1].min1 == T[s << 1 | 1].min1) {
-			T[s].min1 = T[s << 1].min1;
-			T[s].cnt_min = T[s << 1].cnt_min + T[s << 1 | 1].cnt_min;
-			T[s].min2 = min(T[s << 1].min2, T[s << 1 | 1].min2);
-		}
-		else if (T[s << 1].min1 < T[s << 1 | 1].min1) {
-			T[s].min1 = T[s << 1].min1;
-			T[s].cnt_min = T[s << 1].cnt_min;
-			T[s].min2 = min(T[s << 1].min2, T[s << 1 | 1].min1);
-		}
-		else {
-			T[s].min1 = T[s << 1 | 1].min1;
-			T[s].cnt_min = T[s << 1 | 1].cnt_min;
-			T[s].min2 = min(T[s << 1].min1, T[s << 1 | 1].min2);
-		}
+struct Beats {
+	static constexpr ll inf = 1e18;
+	struct Node { // cmx/cmn = multiplicity of mx resp. mn
+		ll sum = 0, mx = -inf, mx2 = -inf, mn = inf, mn2 = inf, lz = 0;
+		int cmx = 0, cmn = 0;
+	};
+	int n; vector<Node> t;
+	Beats(const vector<ll>& a) : n(sz(a)), t(4*sz(a)) {
+		build(1, 0, n - 1, a); }
+	void pull(int s) {
+		Node &a = t[2*s], &b = t[2*s+1], &c = t[s];
+		c.sum = a.sum + b.sum;
+		c.mx = max(a.mx, b.mx), c.mn = min(a.mn, b.mn);
+		c.mx2 = max(a.mx == c.mx ? a.mx2 : a.mx,
+		            b.mx == c.mx ? b.mx2 : b.mx);
+		c.mn2 = min(a.mn == c.mn ? a.mn2 : a.mn,
+		            b.mn == c.mn ? b.mn2 : b.mn);
+		c.cmx = (a.mx==c.mx ? a.cmx:0) + (b.mx==c.mx ? b.cmx:0);
+		c.cmn = (a.mn==c.mn ? a.cmn:0) + (b.mn==c.mn ? b.cmn:0);
 	}
-	void build(int s = 1, int l = 0, int r = n - 1) {
-		if (l == r) {
-			T[s].max1 = T[s].min1 = T[s].sum = a[l];
-			T[s].cnt_max = T[s].cnt_min = 1;
-			T[s].max2 = -inf, T[s].min2 = inf;
-			return;
-		}
-		int mid = (l + r) >> 1;
-		build(s << 1, l, mid); build(s << 1 | 1, mid + 1, r);
-		merge(s);
+	void build(int s, int l, int r, const vector<ll>& a) {
+		if (l == r) { t[s] = {a[l],a[l],-inf,a[l],inf,0,1,1}; return; }
+		int m = (l + r) / 2;
+		build(2*s, l, m, a), build(2*s+1, m+1, r, a), pull(s);
 	}
-	void push_add(int s, int l, int r, ll val) {
-		if (!val) return;
-		T[s].sum += 1LL * (r - l + 1) * val;
-		T[s].max1 += val; if (T[s].max2 != -inf) T[s].max2 += val;
-		T[s].min1 += val; if (T[s].min2 != inf) T[s].min2 += val;
-		T[s].lazy += val;
+	void addAll(int s, int len, ll x) {
+		Node& c = t[s];
+		c.sum += len * x; c.lz += x;
+		c.mx += x; if (c.mx2 != -inf) c.mx2 += x;
+		c.mn += x; if (c.mn2 != inf) c.mn2 += x;
 	}
-	void push_max(int s, ll val, bool v) {
-		if (val >= T[s].max1) return;
-		T[s].sum -= 1LL * T[s].max1 * T[s].cnt_max;
-		T[s].max1 = val;
-		T[s].sum += 1LL * T[s].max1 * T[s].cnt_max;
-		if (v) T[s].min1 = T[s].max1;
-		else {
-			if (val <= T[s].min1) T[s].min1 = val;
-			else if (val < T[s].min2) T[s].min2 = val;
-		}
+	void applyMin(int s, ll x) { // only valid while x > mx2
+		Node& c = t[s];
+		if (c.mx <= x) return;
+		c.sum += (x - c.mx) * c.cmx;
+		if (c.mn == c.mx) c.mn = x;
+		else if (c.mn2 == c.mx) c.mn2 = x;
+		c.mx = x;
 	}
-	void push_min(int s, ll val, bool v) {
-		if (val <= T[s].min1) return;
-		T[s].sum -= 1LL * T[s].min1 * T[s].cnt_min;
-		T[s].min1 = val;
-		T[s].sum += 1LL * T[s].min1 * T[s].cnt_min;
-
-		if (v) T[s].max1 = T[s].min1;
-		else {
-			if (val >= T[s].max1) T[s].max1 = val;
-			else if (val > T[s].max2) T[s].max2 = val;
-		}
+	void applyMax(int s, ll x) { // only valid while x < mn2
+		Node& c = t[s];
+		if (c.mn >= x) return;
+		c.sum += (x - c.mn) * c.cmn;
+		if (c.mx == c.mn) c.mx = x;
+		else if (c.mx2 == c.mn) c.mx2 = x;
+		c.mn = x;
 	}
-	void push_down(int s, int l, int r) {
+	void push(int s, int l, int r) {
 		if (l == r) return;
-		int mid = (l + r) >> 1;
-		if (T[s].lazy) {
-			push_add(s << 1, l, mid, T[s].lazy);
-			push_add(s << 1 | 1, mid + 1, r, T[s].lazy);
-			T[s].lazy = 0;
-		}
-		push_max(s << 1, T[s].max1, l == mid);
-		push_max(s << 1 | 1, T[s].max1, mid + 1 == r);
-		push_min(s << 1, T[s].min1, l == mid);
-		push_min(s << 1 | 1, T[s].min1, mid + 1 == r);
+		int m = (l + r) / 2;
+		if (t[s].lz) addAll(2*s, m-l+1, t[s].lz),
+			addAll(2*s+1, r-m, t[s].lz), t[s].lz = 0;
+		applyMin(2*s, t[s].mx), applyMin(2*s+1, t[s].mx);
+		applyMax(2*s, t[s].mn), applyMax(2*s+1, t[s].mn);
 	}
-	void update_add(int s, int l, int r, int u, int v, ll val) {
-		if (l > v || r < u) return;
-		if (l >= u && r <= v) {
-			push_add(s, l, r, val);
-			return;
-		}
-		push_down(s, l, r);
-		int mid = (l + r) >> 1;
-		update_add(s << 1, l, mid, u, v, val);
-		update_add(s << 1 | 1, mid + 1, r, u, v, val);
-		merge(s);
+	void add(int s, int l, int r, int u, int v, ll x) {
+		if (v < l || r < u) return;
+		if (u <= l && r <= v) return addAll(s, r - l + 1, x);
+		push(s, l, r);
+		int m = (l + r) / 2;
+		add(2*s, l, m, u, v, x), add(2*s+1, m+1, r, u, v, x), pull(s);
 	}
-	void update_max(int s, int l, int r, int u, int v, ll val) {
-		if (l > v || r < u || val <= T[s].min1) return;
-		if (l >= u && r <= v && val < T[s].min2) {
-			push_min(s, val, l == r);
-			return;
-		}
-		push_down(s, l, r);
-		int mid = (l + r) >> 1;
-		update_max(s << 1, l, mid, u, v, val);
-		update_max(s << 1 | 1, mid + 1, r, u, v, val);
-		merge(s);
+	// hi: v = max(v, x); else v = min(v, x)
+	void clampTo(int s, int l, int r, int u, int v, ll x, bool hi) {
+		if (v < l || r < u || (hi ? t[s].mn >= x : t[s].mx <= x)) return;
+		if (u <= l && r <= v && (hi ? t[s].mn2 > x : t[s].mx2 < x))
+			return hi ? applyMax(s, x) : applyMin(s, x);
+		push(s, l, r);
+		int m = (l + r) / 2;
+		clampTo(2*s, l, m, u, v, x, hi);
+		clampTo(2*s+1, m+1, r, u, v, x, hi);
+		pull(s);
 	}
-	void update_min(int s, int l, int r, int u, int v, ll val) {
-		if (l > v || r < u || val >= T[s].max1) return;
-		if (l >= u && r <= v && val > T[s].max2) {
-			push_max(s, val, l == r);
-			return;
-		}
-		push_down(s, l, r);
-		int mid = (l + r) >> 1;
-		update_min(s << 1, l, mid, u, v, val);
-		update_min(s << 1 | 1, mid + 1, r, u, v, val);
-		merge(s);
+	ll sum(int s, int l, int r, int u, int v) {
+		if (v < l || r < u) return 0;
+		if (u <= l && r <= v) return t[s].sum;
+		push(s, l, r);
+		int m = (l + r) / 2;
+		return sum(2*s, l, m, u, v) + sum(2*s+1, m+1, r, u, v);
 	}
-	ll get(int s, int l, int r, int u, int v) {
-		if (l > v || r < u) return 0;
-		if (l >= u && r <= v) return T[s].sum;
-		push_down(s, l, r);
-		int mid = (l + r) >> 1;
-		return get(s << 1, l, mid, u, v) + get(s << 1 | 1, mid + 1, r, u, v);
+	ll ext(int s, int l, int r, int u, int v, bool hi) { // max, or -min
+		if (v < l || r < u) return -inf;
+		if (u <= l && r <= v) return hi ? t[s].mx : -t[s].mn;
+		push(s, l, r);
+		int m = (l + r) / 2;
+		return max(ext(2*s,l,m,u,v,hi), ext(2*s+1,m+1,r,u,v,hi));
 	}
-} it;
+	void add(int u, int v, ll x) { add(1, 0, n-1, u, v, x); }
+	void chmin(int u, int v, ll x) { clampTo(1,0,n-1,u,v,x,0); }
+	void chmax(int u, int v, ll x) { clampTo(1,0,n-1,u,v,x,1); }
+	ll sum(int u, int v) { return sum(1, 0, n-1, u, v); }
+	ll mx(int u, int v) { return ext(1, 0, n-1, u, v, 1); }
+	ll mn(int u, int v) { return -ext(1, 0, n-1, u, v, 0); }
+};
