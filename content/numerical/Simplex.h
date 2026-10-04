@@ -27,7 +27,6 @@ struct LPSolver {
 	int m, n;
 	vi N, B;
 	vvd D;
-
 	LPSolver(const vvd& A, const vd& b, const vd& c) :
 		m(sz(b)), n(sz(c)), N(n+1), B(m), D(m+2, vd(n+2)) {
 			rep(i,0,m) rep(j,0,n) D[i][j] = A[i][j];
@@ -35,7 +34,6 @@ struct LPSolver {
 			rep(j,0,n) { N[j] = j; D[m][j] = -c[j]; }
 			N[n] = -1; D[m+1][n] = 1;
 		}
-
 	void pivot(int r, int s) {
 		T *a = D[r].data(), inv = 1 / a[s];
 		rep(i,0,m+2) if (i != r && abs(D[i][s]) > eps) {
@@ -48,7 +46,6 @@ struct LPSolver {
 		D[r][s] = inv;
 		swap(B[r], N[s]);
 	}
-
 	bool simplex(int phase) {
 		int x = m + phase - 1;
 		for (;;) {
@@ -65,7 +62,6 @@ struct LPSolver {
 			pivot(r, s);
 		}
 	}
-
 	T solve(vd &x) {
 		int r = 0;
 		rep(i,1,m) if (D[i][n+1] < D[r][n+1]) r = i;

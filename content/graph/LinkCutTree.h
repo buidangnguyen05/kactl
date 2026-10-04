@@ -22,7 +22,6 @@ struct LCT {
 	}; /// For path max/min: drop sub_* and comp_*, delete tsz/vsz/ssum/vsum/slz/vlz/snap and every line naming one, except the three "max:" lines, which you edit as noted.
 	vector<N> t;
 	LCT(int n) : t(n + 1) { t[0].cnt = t[0].tsz = 0; } /// Nodes 1..n, all values 0. max: t[0].cnt = 0, t[0].sum = -inf.
-
 	int dir(int x, int y) { return t[x].c[1] == y; }
 	void ap(int x, ll v, bool sub) { /// add v to x: sub=0 only its path, sub=1 its whole subtree
 		if (!x || !v) return;

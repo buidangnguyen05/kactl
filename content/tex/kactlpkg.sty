@@ -125,6 +125,8 @@
 		{\huge\bfseries (\thechapter) \par\nobreak }
 	\fi
 	\startcontents[chapters]
+	\interlinepenalty=0 % the \interlinepenalty\@M above leaks out of this macro
+	\@secpenalty=0 % breaking before a section is no better than elsewhere
 }
 
 \renewcommand\section{\@startsection {section}{1}{\z@}%
@@ -204,6 +206,13 @@
 \lstset{inputencoding=utf8}
 \lstset{aboveskip=3pt}
 \lstset{belowskip=2pt}
+% listings encourages a break between an entry's title and its caption
+% (\penalty-50 before each listing, \allowbreak before a top caption), which
+% strands titles at column bottoms. Keep them together; the code may still
+% start in the next column.
+\RequirePackage{etoolbox}
+\patchcmd{\lst@Init}{\par\penalty-50\relax}{\par\nobreak}{}{\PackageWarning{kactlpkg}{lst@Init not patched}}
+\patchcmd{\lst@MakeCaption}{\allowbreak}{}{}{\PackageWarning{kactlpkg}{lst@MakeCaption not patched}}
 
 \lstdefinelanguage{raw}{} % Raw language, no keywords.
 
@@ -342,7 +351,8 @@
 
 
 \newcommand{\codeheader}[2]{
-	{\par\noindent\footnotesize{\textbf{#1:} #2\par}}
+	{\par\noindent\footnotesize\interlinepenalty\@M % keep these together
+	{\textbf{#1:} #2\par}}\nobreak
 }
 
 \long\def\@makecaption#1#2{

@@ -1,24 +1,59 @@
-name: C/C++ CI
+name: CI
 
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+  workflow_dispatch:
+
+# A newer push to the same branch cancels the older run.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
+  pdf:
+    name: Build PDF (max 26 pages)
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Install pdflatex
-      run: sudo apt-get install texlive-latex-base texlive-latex-recommended texlive-latex-extra
-    - name: Build pdf
+    - uses: actions/checkout@v4
+    - name: Install LaTeX
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends \
+          texlive-latex-base texlive-latex-recommended texlive-latex-extra \
+          texlive-fonts-recommended texlive-plain-generic
+    - name: Build kactl.pdf
       run: make kactl
-    - name: Run compiles
+    - name: Check page count (cover included)
+      run: make check-pages MAX_PAGES=26
+    - name: Upload PDFs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: kactl-pdf
+        path: |
+          kactl.pdf
+          test-session.pdf
+        if-no-files-found: warn
+
+  compiles:
+    name: Compile all headers
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@v4
+    - name: Compile every header in content/
       run: make test-compiles
-    - name: Run stress tests
+
+  stress-tests:
+    name: Stress tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run everything in stress-tests/
       run: make test

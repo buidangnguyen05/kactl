@@ -17,7 +17,6 @@ struct LCA {
 	int T = 0;
 	vi time, path, ret;
 	RMQ<int> rmq;
-
 	LCA(vector<vi>& C) : time(sz(C)), rmq((dfs(C,0,-1), ret)) {}
 	void dfs(vector<vi>& C, int v, int par) {
 		time[v] = T++;
@@ -26,7 +25,6 @@ struct LCA {
 			dfs(C, y, v);
 		}
 	}
-
 	int lca(int a, int b) {
 		if (a == b) return a;
 		tie(a, b) = minmax(time[a], time[b]);

@@ -79,27 +79,20 @@ struct Beats {
 		push(s, l, r);
 		int m = (l + r) / 2;
 		clampTo(2*s, l, m, u, v, x, hi);
-		clampTo(2*s+1, m+1, r, u, v, x, hi);
-		pull(s);
+		clampTo(2*s+1, m+1, r, u, v, x, hi), pull(s);
 	}
-	ll sum(int s, int l, int r, int u, int v) {
-		if (v < l || r < u) return 0;
-		if (u <= l && r <= v) return t[s].sum;
+	ll qry(int s, int l, int r, int u, int v, int k) { // sum, max, -min
+		if (v < l || r < u) return k ? -inf : 0;
+		if (u<=l && r<=v) return k ? k < 2 ? t[s].mx : -t[s].mn : t[s].sum;
 		push(s, l, r);
 		int m = (l + r) / 2;
-		return sum(2*s, l, m, u, v) + sum(2*s+1, m+1, r, u, v);
-	}
-	ll ext(int s, int l, int r, int u, int v, bool hi) { // max, or -min
-		if (v < l || r < u) return -inf;
-		if (u <= l && r <= v) return hi ? t[s].mx : -t[s].mn;
-		push(s, l, r);
-		int m = (l + r) / 2;
-		return max(ext(2*s,l,m,u,v,hi), ext(2*s+1,m+1,r,u,v,hi));
+		ll a = qry(2*s, l, m, u, v, k), b = qry(2*s+1, m+1, r, u, v, k);
+		return k ? max(a, b) : a + b;
 	}
 	void add(int u, int v, ll x) { add(1, 0, n-1, u, v, x); }
 	void chmin(int u, int v, ll x) { clampTo(1,0,n-1,u,v,x,0); }
 	void chmax(int u, int v, ll x) { clampTo(1,0,n-1,u,v,x,1); }
-	ll sum(int u, int v) { return sum(1, 0, n-1, u, v); }
-	ll mx(int u, int v) { return ext(1, 0, n-1, u, v, 1); }
-	ll mn(int u, int v) { return -ext(1, 0, n-1, u, v, 0); }
+	ll sum(int u, int v) { return qry(1, 0, n-1, u, v, 0); }
+	ll mx(int u, int v) { return qry(1, 0, n-1, u, v, 1); }
+	ll mn(int u, int v) { return -qry(1, 0, n-1, u, v, 2); }
 };
