@@ -3,7 +3,7 @@
  * License: CC0
  * Description: Arbitrary-precision signed integer, base $10^9$,
  *  little-endian limbs. Addition, multiplication, comparison and I/O;
- *  division lives in BigNumDivMod.h and BigNumDivSmall.h.
+ *  BigNumDivSmall.h divides by an int (BigNumDivMod.h, not printed, by a Big).
  * Time: $O(n)$ for $\pm$, $O(nm)$ for $*$
  * Status: stress-tested against \_\_int128
  */
