@@ -56,16 +56,10 @@ struct Big {
 	}
 	bool operator==(const Big& o) const { return sg == o.sg && a == o.a; }
 	friend Big operator*(const Big& x, const Big& y) {
-		Big r; if (x.a.empty() || y.a.empty()) return r;
-		vector<ll> c(sz(x.a) + sz(y.a));
-		rep(i,0,sz(x.a)) {
-			ll carry = 0;
-			rep(j,0,sz(y.a)) {
-				ll v = c[i+j] + (ll)x.a[i] * y.a[j] + carry;
-				c[i+j] = v % B, carry = v / B;
-			}
-			for (int j = sz(y.a); carry; j++)
-				c[i+j] += carry, carry = c[i+j] / B, c[i+j] %= B;
+		Big r; vector<ll> c(sz(x.a) + sz(y.a)); // carry as we go
+		rep(i,0,sz(x.a)) rep(j,0,sz(y.a)) {
+			c[i+j] += (ll)x.a[i] * y.a[j];
+			c[i+j+1] += c[i+j] / B, c[i+j] %= B;
 		}
 		for (ll v : c) r.a.push_back(int(v));
 		r.sg = x.sg * y.sg; r.trim(); return r;

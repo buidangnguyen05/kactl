@@ -110,6 +110,22 @@ int main() {
 		assert(a == full);
 	}
 
+	// Every prefix: a guess is either empty or right. Fitting on all terms
+	// (no hold-out) fails this on sparse sequences, e.g. n! at 3 | n.
+	// All-zero prefixes are skipped: nothing can be guessed from them.
+	for (auto& [name, full] : known()) rep(F,1,61) {
+		vector<ll> a(full.begin(), full.begin() + F);
+		if (count(all(a), 0) == F) continue;
+		Mat P = guessPRec(a, 100);
+		if (P.empty()) continue;
+		while (sz(a) < N) {
+			ll v = nextTerm(P, a, sz(a));
+			assert(v >= 0);
+			a.push_back(v);
+		}
+		assert(a == full);
+	}
+
 	// Order-degree trade-off: (n^2+1) n! has relations of order 1 and
 	// degree 3, and of order 3 and degree 1, but none with constant
 	// coefficients. Lowering the cap must switch to the longer relation.

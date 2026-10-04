@@ -3,12 +3,10 @@
  * Date: 2026-10-04
  * License: CC0
  * Source: folklore (Gauss-Jordan elimination)
- * Description: Linear algebra mod a prime. rref turns $A$ ($n \times m$) into reduced
- * row echelon form in place and returns the pivot column of each nonzero row
- * (its size is the rank). solveLinearMod solves $Ax = b$ for $x$ of size $m$, free
- * variables set to 0; returns rank, or $-1$ if no solution. nullspace returns a basis of
- * $\{x : Ax = 0\}$ ($A$ needs $\ge 1$ row): for each non-pivot column $c$, $x_c = 1$.
- * Values in $[0, mod)$.
+ * Description: Linear algebra mod a prime, values in $[0, mod)$. rref reduces
+ * $A$ in place and returns the pivot columns (as many as the rank).
+ * solveLinearMod solves $Ax = b$ for $x$ of size $m$, free variables 0; returns
+ * rank, or $-1$ if none. nullspace: basis of $\{x : Ax = 0\}$ ($A$ needs a row).
  * Usage: vector<ll> x(m); int r = solveLinearMod(A, b, x);
  * Time: O(nm \cdot rank)
  * Status: bruteforce-tested mod 5 for n, m <= 4
@@ -28,10 +26,8 @@ vi rref(Mat& A) {
 		swap(A[r], A[s]);
 		ll v = modpow(A[r][c], mod-2);
 		for (ll& x : A[r]) x = x * v % mod;
-		rep(t,0,n) if (t != r && A[t][c]) {
-			ll f = A[t][c];
+		rep(t,0,n) if (ll f = A[t][c]; t != r && f)
 			rep(u,c,m) A[t][u] = (A[t][u] - f * A[r][u] % mod + mod) % mod;
-		}
 		piv.push_back(c);
 	}
 	return piv;
@@ -49,12 +45,10 @@ int solveLinearMod(Mat A, const vector<ll>& b, vector<ll>& x) {
 
 Mat nullspace(Mat A) {
 	int m = sz(A[0]);
-	vi piv = rref(A), fr(m, 1);
-	for (int c : piv) fr[c] = 0;
+	vi piv = rref(A);
 	Mat res;
-	rep(c,0,m) if (fr[c]) {
-		vector<ll> x(m);
-		x[c] = 1;
+	rep(c,0,m) if (!binary_search(all(piv), c)) {
+		vector<ll> x(m); x[c] = 1;
 		rep(t,0,sz(piv)) x[piv[t]] = (mod - A[t][c]) % mod;
 		res.push_back(x);
 	}

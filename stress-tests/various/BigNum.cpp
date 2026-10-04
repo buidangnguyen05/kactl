@@ -31,6 +31,27 @@ int main() {
 		L u = rnd(18), v = rnd(18);
 		assert(str(Big(str(u)) * Big(str(v))) == str(u * v));
 	}
+	// Many-limb products, checked mod primes; limbs must stay normalized.
+	// All-(B-1) limbs give the longest carry chains.
+	auto modp = [](const Big& b, ll p) {
+		ll r = 0;
+		for (int i = sz(b.a); i--;) r = (r * Big::B + b.a[i]) % p;
+		return b.sg < 0 ? (p - r) % p : r;
+	};
+	const ll ps[] = {1000000007, 998244353, 2147483647};
+	rep(it,0,3000) {
+		Big x, y;
+		int n = rand() % 40, m = rand() % 40, all9 = rand() % 4 == 0;
+		rep(i,0,n) x.a.push_back(all9 ? Big::B - 1 : rand() % Big::B);
+		rep(i,0,m) y.a.push_back(all9 ? Big::B - 1 : rand() % Big::B);
+		x.sg = rand() % 2 ? 1 : -1, y.sg = rand() % 2 ? 1 : -1;
+		x.trim(), y.trim();
+		Big z = x * y;
+		for (int v : z.a) assert(0 <= v && v < Big::B);
+		assert(z.a.empty() || z.a.back());
+		if (sz(x.a) && sz(y.a)) assert(sz(z.a) >= sz(x.a) + sz(y.a) - 1);
+		for (ll p : ps) assert(modp(z, p) == modp(x, p) * modp(y, p) % p);
+	}
 	assert(str(Big(-1234567890123456789LL)) == "-1234567890123456789");
 	Big f(1);
 	rep(i,1,101) f = f * Big((ll)i);
