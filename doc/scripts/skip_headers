@@ -6,7 +6,7 @@ ModInverse.h
 ModSqrt.h
 Hashing-codeforces.h
 NumberTheoreticTransform.h
-MoQueries.h
+MoOnTree.h
 Mo.h
 MoRollback.h
 MoUpdate.h
