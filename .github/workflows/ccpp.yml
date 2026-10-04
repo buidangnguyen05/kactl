@@ -5,10 +5,11 @@ on:
   pull_request:
   workflow_dispatch:
 
-# A newer push to the same branch cancels the older run.
+# A newer push to the same branch cancels the older run, except on main,
+# where every run finishes so its Pages deployment is never cut off.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 permissions:
   contents: read
@@ -39,6 +40,23 @@ jobs:
           kactl.pdf
           test-session.pdf
         if-no-files-found: warn
+    - name: Prepare Pages site
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        mkdir -p site
+        cp kactl.pdf test-session.pdf site/
+        pages=$(sed -n 's/^Output written on .* (\([0-9]*\) pages.*/\1/p' build/kactl.log | tail -n 1)
+        cat > site/index.html <<EOF
+        <!doctype html><meta charset="utf-8"><title>KACTL notebook</title>
+        <h1>KACTL notebook</h1>
+        <p><a href="kactl.pdf">kactl.pdf</a> ($pages pages) &middot; <a href="test-session.pdf">test-session.pdf</a></p>
+        <p>Built from <a href="https://github.com/${{ github.repository }}/commit/${{ github.sha }}">${GITHUB_SHA::7}</a> on $(date -u '+%Y-%m-%d %H:%M UTC').</p>
+        EOF
+    - name: Upload Pages site
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: site
 
   compiles:
     name: Compile all headers
@@ -57,3 +75,20 @@ jobs:
     - uses: actions/checkout@v4
     - name: Run everything in stress-tests/
       run: make test
+
+  # Publishes the PDFs at https://<owner>.github.io/<repo>/, but only for a
+  # push to main where everything passed, so the link always shows a good build.
+  deploy:
+    name: Publish to GitHub Pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [pdf, compiles, stress-tests]
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}kactl.pdf
+    steps:
+    - id: deployment
+      uses: actions/deploy-pages@v4
