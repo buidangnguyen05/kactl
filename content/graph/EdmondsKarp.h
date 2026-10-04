@@ -14,13 +14,11 @@ template<class T> T edmondsKarp(vector<unordered_map<int, T>>&
 	assert(source != sink);
 	T flow = 0;
 	vi par(sz(graph)), q = par;
-
 	for (;;) {
 		fill(all(par), -1);
 		par[source] = 0;
 		int ptr = 1;
 		q[0] = source;
-
 		rep(i,0,ptr) {
 			int x = q[i];
 			for (auto e : graph[x]) {
@@ -36,7 +34,6 @@ out:
 		T inc = numeric_limits<T>::max();
 		for (int y = sink; y != source; y = par[y])
 			inc = min(inc, graph[par[y]][y]);
-
 		flow += inc;
 		for (int y = sink; y != source; y = par[y]) {
 			int p = par[y];

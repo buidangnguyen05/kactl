@@ -18,7 +18,6 @@ struct PalinTree {
   vi fail, len, pos, lz, freq;
   vector<vi> nxt;
   int n, cur;
- 
   PalinTree(const string &s) : str(s) {
     fail = len = pos = lz = freq = vi(sz(s) + 2);
     nxt.resize(sz(s) + 2);
@@ -27,7 +26,6 @@ struct PalinTree {
     for(int i = 0; i < sz(s); ++i) addChar(i, s[i]);
     propagate();
   }
- 
   void addChar(int i, int c) {
     int u = getFailure(cur, i);
     int &ch = nxt[u][c];
@@ -35,13 +33,11 @@ struct PalinTree {
     int v = cur = ch = addNode(len[u] + 2, i - len[u] - 1);
     fail[v] = len[v] == 1 ? 1 : nxt[getFailure(fail[u], i)][c];
   }
- 
   int addNode(int l, int p) {
     nxt[n].assign(A, -1);
     len[n] = l, pos[n] = p, lz[n] = 1, freq[n] = 0;
     return n++;
   }
- 
   void propagate() {
     for (int i = n - 1; ~i; --i) {
       freq[i] += lz[i];
@@ -49,7 +45,6 @@ struct PalinTree {
       lz[i] = 0;
     }
   }
- 
   int getFailure(int u, int i) {
     while (i <= len[u] || str[i] != str[i - len[u] - 1]) u = fail[u];
     return u;

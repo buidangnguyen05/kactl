@@ -18,10 +18,8 @@ vector<pii> generalMatching(int N, vector<pii>& ed) {
 		int a = pa.first, b = pa.second, r = rand() % mod;
 		mat[a][b] = r, mat[b][a] = (mod - r) % mod;
 	}
-
 	int r = matInv(A = mat), M = 2*N - r, fi, fj;
 	assert(r % 2 == 0);
-
 	if (M != N) do {
 		mat.resize(M, vector<ll>(M));
 		rep(i,0,N) {
@@ -32,7 +30,6 @@ vector<pii> generalMatching(int N, vector<pii>& ed) {
 			}
 		}
 	} while (matInv(A = mat) != M);
-
 	vi has(M, 1); vector<pii> ret;
 	rep(it,0,M/2) {
 		rep(i,0,M) if (has[i])
