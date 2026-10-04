@@ -125,6 +125,8 @@
 		{\huge\bfseries (\thechapter) \par\nobreak }
 	\fi
 	\startcontents[chapters]
+	\interlinepenalty=0 % the \interlinepenalty\@M above leaks out of this macro
+	\@secpenalty=0 % breaking before a section is no better than elsewhere
 }
 
 \renewcommand\section{\@startsection {section}{1}{\z@}%
