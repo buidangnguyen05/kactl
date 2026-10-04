@@ -3,7 +3,7 @@
 This repo hosts KACTL, [KTH](https://en.wikipedia.org/wiki/KTH_Royal_Institute_of_Technology)'s ICPC team reference document.
 It consists of 25 pages of copy-pasteable C++ code, for use in ICPC-style programming competitions.
 
-See [kactl.pdf](https://buidangnguyen05.github.io/kactl/kactl.pdf) for the final, browsable version (rebuilt by CI on every push to main), and [content/](./content/) for raw source code.
+See [kactl.pdf](https://buidangnguyen05.github.io/kactl/kactl.pdf) for the final, browsable version and [the contents page](https://buidangnguyen05.github.io/kactl/contents.html) for a searchable list of everything in it (both rebuilt by CI on every push to main), and [content/](./content/) for raw source code.
 
 ## Aspirations
 

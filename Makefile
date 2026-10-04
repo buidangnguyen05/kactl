@@ -13,6 +13,7 @@ help:
 	@echo "	make test		- to run all the stress tests in stress-tests/"
 	@echo "	make test-compiles	- to test compiling all headers"
 	@echo "	make check-pages	- to check the built pdf is at most MAX_PAGES (26) pages"
+	@echo "	make contents		- to write build/contents.html, a searchable contents page (after make kactl)"
 	@echo "	make help		- to show this information"
 	@echo "	make showexcluded	- to show files that are not included in the doc"
 	@echo ""
@@ -32,7 +33,7 @@ clean:
 veryclean: clean
 	rm -f kactl.pdf test-session.pdf
 
-.PHONY: help fast kactl clean veryclean
+.PHONY: help fast kactl clean veryclean contents check-pages
 
 build:
 	mkdir -p build/
@@ -42,6 +43,9 @@ test:
 
 test-compiles:
 	./doc/scripts/compile-all.sh .
+
+contents: | build
+	python3 doc/scripts/make-contents.py build/contents.html
 
 MAX_PAGES ?= 26
 check-pages:

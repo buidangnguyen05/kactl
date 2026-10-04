@@ -40,16 +40,17 @@ jobs:
           kactl.pdf
           test-session.pdf
         if-no-files-found: warn
+    - name: Build contents page
+      run: mkdir -p site && python3 doc/scripts/make-contents.py site/contents.html
     - name: Prepare Pages site
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
-        mkdir -p site
         cp kactl.pdf test-session.pdf site/
         pages=$(sed -n 's/^Output written on .* (\([0-9]*\) pages.*/\1/p' build/kactl.log | tail -n 1)
         cat > site/index.html <<EOF
         <!doctype html><meta charset="utf-8"><title>KACTL notebook</title>
         <h1>KACTL notebook</h1>
-        <p><a href="kactl.pdf">kactl.pdf</a> ($pages pages) &middot; <a href="test-session.pdf">test-session.pdf</a></p>
+        <p><a href="kactl.pdf">kactl.pdf</a> ($pages pages) &middot; <a href="contents.html">What's in it</a> (searchable contents) &middot; <a href="test-session.pdf">test-session.pdf</a></p>
         <p>Built from <a href="https://github.com/${{ github.repository }}/commit/${{ github.sha }}">${GITHUB_SHA::7}</a> on $(date -u '+%Y-%m-%d %H:%M UTC').</p>
         EOF
     - name: Upload Pages site
