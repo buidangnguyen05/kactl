@@ -6,6 +6,13 @@
  * Returns -inf if there is no solution, inf if there are arbitrarily good solutions, or the maximum value of $c^T x$ otherwise.
  * The input vector is set to an optimal $x$ (or in the unbounded case, an arbitrary solution fulfilling the constraints).
  * Numerical stability is not guaranteed. For better performance, define variables such that $x = 0$ is viable.
+ * To bring a problem into this form:
+ *  \begin{itemize}[nosep,leftmargin=*]
+ *    \item $\ge$ row: negate it. $=$ row: add it as both $\le$ and $\ge$.
+ *    \item Minimize $c^T x$: maximize $-c^T x$, negate the answer.
+ *    \item Free $x_j$: add column $x_j'$ = $x_j$'s column in $A$, $c$ negated; use $x_j - x_j'$.
+ *    \item Bound $x_j \ge L$: set $x_j = y_j + L$; $b \mathrel{-}= L A_{\cdot j}$, value $+ L c_j$.
+ *  \end{itemize}
  * Usage:
  * vvd A = {{1,-1}, {-1,1}, {-1,-2}};
  * vd b = {1,1,-4}, c = {-1,-1}, x;
