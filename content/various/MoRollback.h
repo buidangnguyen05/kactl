@@ -6,8 +6,7 @@
  */
 #pragma once
 
-/// Undo log.
-struct Ledger {
+struct Ledger { // add() must change state only through lg.set()
 	vector<pair<ll*, ll>> log;
 	bool on = 0;
 	void set(ll& x, ll v) { if (on) log.push_back({&x, x}); x = v; }
@@ -17,9 +16,9 @@ struct Ledger {
 	}
 } lg;
 
-void add(int i, int dir);  /// always use lg.set() to change values
-void reset();              /// reset all data structures of window
-ll get();                  /// e.g. count distinct: return d;
+void add(int i, int dir); // dir: 1 = right end, 0 = left end
+void reset();              // reset all data structures of window
+ll get();                  // e.g. count distinct: return d;
 
 struct QR { int l, r, id; };
 vector<ll> moRB(vector<QR> q, int n) {

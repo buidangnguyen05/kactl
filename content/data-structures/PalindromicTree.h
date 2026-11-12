@@ -8,6 +8,8 @@
  * [2, n) are the palindromes, s.substr(pos[i], len[i]), occurs freq[i].
  * fail[i] is the longest suffix palindrome of ith palindrome.
  * Time: O(n)
+ * Memory: $A$ ints per node, about 550MB at $n = 10^6$; for lowercase input
+ * use $A = 26$ and pass \texttt{s[i] - 'a'}.
  * Status: stress-tested
  */
 #pragma once

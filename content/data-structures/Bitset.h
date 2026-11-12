@@ -25,7 +25,7 @@ struct bit {
 		rep(i, 0, L) res += __builtin_popcountll(t[i]);
 		return res;
 	}
-	int find_first() const { /// index of lowest set bit, L*64 if none
+	int find_first() const { // index of lowest set bit, L*64 if none
 		rep(i, 0, L) if (t[i]) return i * 64 + __builtin_ctzll(t[i]);
 		return L * 64;
 	}

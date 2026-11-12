@@ -32,10 +32,10 @@ template<int N> struct OrderedSet {
 			if (x + i <= N && s[x + i] <= k) k -= s[x + i], x += i;
 		return x;
 	}
-	int next(int x) const { /// smallest element >= x, -1 if none
+	int next(int x) const { // smallest element >= x, -1 if none
 		return find_by_order(order_of_key(x));
 	}
-	int prev(int x) const { /// largest element <= x, -1 if none
+	int prev(int x) const { // largest element <= x, -1 if none
 		int k = order_of_key(x + 1);
 		return k ? find_by_order(k - 1) : -1;
 	}

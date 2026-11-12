@@ -7,9 +7,9 @@
  */
 #pragma once
 
-void add(int i);   /// e.g. count distinct: if (!cnt[a[i]]++) d++;
-void del(int i);   /// e.g. count distinct: if (!--cnt[a[i]]) d--;
-ll get();          /// e.g. count distinct: return d;
+void add(int i);   // e.g. count distinct: if (!cnt[a[i]]++) d++;
+void del(int i);   // e.g. count distinct: if (!--cnt[a[i]]) d--;
+ll get();          // e.g. count distinct: return d;
 
 struct Q { int l, r, id; };
 vector<ll> mo(vector<Q> q, int n) {

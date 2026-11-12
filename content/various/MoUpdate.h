@@ -9,11 +9,11 @@
  */
 #pragma once
 
-void add(int i);    /// e.g. count distinct: if (!cnt[a[i]]++) d++;
-void del(int i);	/// e.g. count distinct: if (!--cnt[a[i]]) d--;
-ll get();			/// e.g. count distinct: return d;
+void add(int i);    // e.g. count distinct: if (!cnt[a[i]]++) d++;
+void del(int i);	// e.g. count distinct: if (!--cnt[a[i]]) d--;
+ll get();			// e.g. count distinct: return d;
 
-struct Upd { int p, x; };        /// a[p] = x
+struct Upd { int p, x; };        // a[p] = x
 vector<Upd> ops;
 struct Q3 { int l, r, t, id; };
 vector<ll> mo3D(vector<Q3> q, vi& a) {
