@@ -79,10 +79,33 @@
 \renewcommand{\headrulewidth}{0pt}
 \headheight 25pt
 \lhead{\@unishort}
-\chead{\immediate\write18{python3 content/tex/preprocessor.py --print-header "\splitbotmarks\hdrmark|\botmarks\hdrmark" -o \@builddir/header2.tmp}\immediate\input{\@builddir/header2.tmp}}
+\chead{\gdef\kactl@foot{}\immediate\write18{python3 content/tex/preprocessor.py --print-header "\splitbotmarks\hdrmark|\botmarks\hdrmark" -o \@builddir/header2.tmp}\immediate\input{\@builddir/header2.tmp}}
+% \kactlhdrnames{A,B,...}: names fill the header up to the team name / page
+% number; whatever does not fit goes to the footer (head is typeset first).
+\newsavebox\kactl@hbox
+\newlength\kactl@side
+\def\kactl@fmt#1{\fontsize{10}{10}\selectfont\textbf{#1}}
+\def\kactl@sep{\enspace}
+\newcommand\kactlhdrnames[1]{%
+	\settowidth\kactl@side{\@unishort\quad}%
+	\def\kactl@head{}\gdef\kactl@foot{}%
+	\@for\kactl@n:=#1\do{%
+		\ifx\kactl@foot\@empty
+			\ifx\kactl@head\@empty \edef\kactl@try{\kactl@n}%
+			\else \edef\kactl@try{\unexpanded\expandafter{\kactl@head}\noexpand\kactl@sep\kactl@n}\fi
+			\sbox\kactl@hbox{\kactl@fmt{\kactl@try}}%
+			\ifdim\wd\kactl@hbox>\dimexpr\headwidth-2\kactl@side\relax
+				\xdef\kactl@foot{\kactl@n}%
+			\else \let\kactl@head\kactl@try \fi
+		\else
+			\xdef\kactl@foot{\unexpanded\expandafter{\kactl@foot}\noexpand\kactl@sep\kactl@n}%
+		\fi}%
+	\kactl@fmt{\kactl@head}}
+\fancypagestyle{plain}{} % chapter-start pages get the same header
 \rhead{\thepage}
 %\lhead{}\chead{\thepage}\rhead{}
-\lfoot{}\cfoot{}\rfoot{}
+\lfoot{}\cfoot{\kactl@fmt{\kactl@foot}}\rfoot{}
+\setlength\footskip{8.5pt} % header overflow sits inside the 0.4cm bottom margin
 \fancyheadoffset{0pt}
 \fancyfootoffset{0pt}
 \setlength\headsep{5pt}
@@ -349,20 +372,33 @@
 \setboolean{hasmemory}{false}
 
 
-\newcommand{\codeheader}[2]{
+% #1: material appended to the paragraph (the right caption, on the last one)
+\newcommand{\codeheader}[3][]{
 	{\par\noindent\footnotesize\interlinepenalty\@M % keep these together
-	{\textbf{#1:} #2\par}}\nobreak
+	{\textbf{#2:} #3#1\par}}\nobreak
 }
+% Right caption flush right at the end of the last header line if it fits,
+% else on a line of its own (TeXbook ch. 14 trick) -- never on top of text.
+\def\kactl@endcap{\unskip\nobreak\hfil\penalty50\hskip1em\hbox{}\nobreak\hfil
+	\hbox{\tiny\@rightcaption}\parfillskip=0pt\finalhyphendemerits=0 }
 
 \long\def\@makecaption#1#2{
 	\vspace{-3pt}
-	\ifthenelse{\boolean{hasdescription}}{\codeheader{Description}{\@defdescription}}{}
-	\ifthenelse{\boolean{hasusage}}{\codeheader{Usage}{\@defusage}}{}
-	\ifthenelse{\boolean{hasmemory}}{\codeheader{Memory}{\@defmemory}}{}
-	\ifthenelse{\boolean{hastime}}{\codeheader{Time}{\@deftime}}{}
-	\ifthenelse{\boolean{hasleftcaption}}{\vspace{0pt}}{\vspace{-5pt}}
-	\tiny
-	\texttt{\@leftcaption} \hfill \@rightcaption
+	\def\kactl@last{}%
+	\ifthenelse{\boolean{hasleftcaption}}{}{%
+		\ifthenelse{\boolean{hasdescription}}{\def\kactl@last{D}}{}%
+		\ifthenelse{\boolean{hasusage}}{\def\kactl@last{U}}{}%
+		\ifthenelse{\boolean{hasmemory}}{\def\kactl@last{M}}{}%
+		\ifthenelse{\boolean{hastime}}{\def\kactl@last{T}}{}}%
+	\def\kactl@cap##1{\ifthenelse{\equal{\kactl@last}{##1}}{\kactl@endcap}{}}%
+	\ifthenelse{\boolean{hasdescription}}{\codeheader[\kactl@cap{D}]{Description}{\@defdescription}}{}
+	\ifthenelse{\boolean{hasusage}}{\codeheader[\kactl@cap{U}]{Usage}{\@defusage}}{}
+	\ifthenelse{\boolean{hasmemory}}{\codeheader[\kactl@cap{M}]{Memory}{\@defmemory}}{}
+	\ifthenelse{\boolean{hastime}}{\codeheader[\kactl@cap{T}]{Time}{\@deftime}}{}
+	\ifthenelse{\equal{\kactl@last}{}}{%
+		\ifthenelse{\boolean{hasleftcaption}}{\vspace{0pt}}{\vspace{-5pt}}
+		\tiny
+		\texttt{\@leftcaption} \hfill \@rightcaption}{}
 }
 
 \newcommand{\bigo}[1] {\ensuremath{\mathcal{O} \left( #1 \right)}}

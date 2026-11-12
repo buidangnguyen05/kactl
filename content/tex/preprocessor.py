@@ -217,16 +217,10 @@ def print_header(data, outstream):
         return
 
     ind = lines.index(until) + 1
-    header_length = len("".join(lines[:ind]))
     def adjust(name):
         return name if name.startswith('.') else name.split('.')[0]
-    output = r"\enspace{}".join(map(adjust, lines[:ind]))
-    font_size = 10
-    for lim, fs in ((150, 8), (180, 7), (215, 6)):
-        if header_length > lim:
-            font_size = fs
-    output = r"\hspace{3mm}\textbf{" + output + "}"
-    output = "\\fontsize{%d}{%d}" % (font_size, font_size) + output
+    # kactlpkg.sty fits these into the header and spills the rest to the footer
+    output = r"\kactlhdrnames{" + ",".join(map(adjust, lines[:ind])) + "}"
     print(output, file=outstream)
     with open('header.tmp', 'w') as f:
         for line in lines[ind:]:
